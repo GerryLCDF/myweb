@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Canal de YouTube</title>
+
+  <!-- Hoja de estilos -->
+  <link rel="stylesheet" href="css/style_yt.css">
+  <link rel="icon" href="img/icon.ico" type="image/x-icon">
+  <!-- Script JavaScript -->
+  <script defer src="js/sjyoutube.js"></script>
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+
+  <!-- Menú hamburguesa -->
+  <div class="menu-bar" onclick="toggleMenu()">
+
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+
+</div>
+<!-- Overlay para efecto borroso -->
+<div class="overlay" id="overlay"></div>
+
+  <!-- Barra lateral (sidebar) -->
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="bio.html">Bio</a></li>
+      <li><a href="game.html">GAME</a></li>
+      <li><a href="gustos.html">Gustos</a></li>
+
+      <li><a href="Portfolio.html">Art Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <!-- Contenedor principal -->
+  <div class="youtube-container fade-in">
+    <div class="channel-info fade-in">
+        <h2>Mi Canal:</h2>
+        
+        <a id="channel-link" href="https://www.youtube.com/channel/UCBvP4UeN3p7a6OevNVdZ3AQ" target="_blank">
+            <img id="channel-image" src="img/logo.jpg" alt="Logo del canal" class="fade-in">
+        </a>
+
+        <h2 id="channel-name" class="fade-in">LCDF</h2>
+        <p id="subscriber-count" class="fade-in">27 suscriptores</p>
+    </div>
+
+    <h3 class="fade-in">Videos del canal:</h3>
+    <div id="recent-videos" class="video-container fade-in">
+        <!-- Aquí se generarán los videos dinámicamente -->
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+/* ======= Estilos Generales ======= */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #111;
+    color: white;
+    margin: 0;
+    padding: 0;
+    transition: filter 0.3s ease;
+}
+
+/* Efecto fade-in al cargar */
+body.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenedor Principal */
+.portfolio-container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Título */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Galería en Grid */
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Estilos de las imágenes en el Grid */
+.grid-item {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.grid-item img {
+    width: 100%;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.grid-item img:hover {
+    transform: scale(1.1);
+}
+
+/* Sección Adicional */
+.extra-gallery {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.extra-gallery h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.extra-images {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.extra-images img {
+    width: 150px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.extra-images img:hover {
+    transform: scale(1.1);
+}
+
+/* ======= Menú Hamburguesa ======= */
+.menu-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.bar {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 6px 0;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding-top: 60px;
+    transition: 0.4s;
+    z-index: 1001;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: left;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar ul li:hover {
+    background: #333;
+}
+
+/* Mostrar Menú */
+.sidebar.open {
+    left: 0;
+}
+
+/* Overlay Borroso */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Desenfoque del contenido */
+.blurred {
+    filter: blur(5px);
+}
+
+/* Ajustar el tamaño del Sidebar */
+.sidebar {
+    position: fixed;
+    left: -270px; /* Oculto inicialmente */
+    top: 0;
+    width: 270px; /* Aumentamos el ancho */
+    height: 100vh; /* Ocupar toda la pantalla */
+    background: rgba(0, 0, 0, 0.9);
+    padding-top: 60px;
+    transition: 0.4s ease-in-out;
+    z-index: 1001;
+    overflow-y: auto; /* Scroll si el contenido es muy largo */
+}
+
+/* Mostrar el Sidebar */
+.sidebar.open {
+    left: 0;
+}
+
+/* Evita que el contenido principal se desplace */
+body {
+    overflow-x: hidden;
+}
+
+/* Fondo borroso y ajustado al tamaño correcto */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Asegura que cubre toda la pantalla */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px); /* Reducimos el blur */
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Arreglar el scroll del contenido cuando el menú está abierto */
+.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+}

@@ -1,0 +1,285 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos globales */
+  body {
+    background-color: #111;
+    font-family: "Source Sans Pro", Arial, sans-serif;
+    color: #fff;
+    transition: filter 0.3s ease;
+  }
+  
+  /* Contenedor principal en dos columnas */
+  .container {
+    display: flex;
+    min-height: 100vh; /* Para ocupar toda la ventana en vertical */
+    position: relative;
+  }
+  
+  .container.blurred {
+    filter: blur(5px);
+  }
+  
+  /* Columna izquierda */
+  .left {
+    width: 35%;
+    position: relative;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Texto vertical en el borde izquierdo */
+  .vertical-text {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    transform: rotate(-90deg) translateX(-50%);
+    transform-origin: left bottom;
+  }
+  
+  .vertical-text span {
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: #ccc;
+  }
+  
+  /* Contenedor de la imagen */
+  .image-container {
+    text-align: center;
+    max-width: 80%;
+  }
+  
+  .image-container img {
+    width: 100%;
+    border-radius: 5px;
+    /* Si quieres efecto monocromático:
+       filter: grayscale(100%) opacity(0.9);
+    */
+  }
+  
+  /* Columna derecha */
+  .right {
+    width: 65%;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Contenido textual */
+  .text-content {
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+  
+  /* Título (nombre) */
+  h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  h1 small {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
+    margin-top: 10px;
+    color: #bbb;
+  }
+  
+  h1 em {
+    font-style: italic;
+    color: #ccc;
+  }
+  
+  /* Párrafo */
+  p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #ddd;
+  }
+  
+  /* Íconos de redes sociales */
+  .social-icons {
+    margin: 20px 0;
+    display: flex;
+    gap: 20px; /* Espacio horizontal entre iconos */
+    align-items: center;
+  }
+  
+  .social-icons a {
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .social-icons svg {
+    width: 30px; 
+    height: 30px;
+    transition: transform 0.2s;
+  }
+  
+  .social-icons svg:hover {
+    transform: scale(1.1); /* Pequeño zoom */
+  }
+  
+  /* Lista de enlaces */
+  .link-list ul {
+    list-style: none;
+  }
+  
+  .link-list ul li {
+    border-bottom: 1px solid #333;
+  }
+  
+  .link-list ul li a {
+    display: block;
+    padding: 15px 0;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+  
+  .link-list ul li a:hover {
+    color: #bbb;
+  }
+  
+  /* Menú hamburguesa */
+  .menu-bar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  .menu-bar .bar {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.3s;
+  }
+  
+  /* Barra lateral oculta por defecto */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 99;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 15px;
+  }
+  
+  .sidebar ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1.2em;
+    display: block;
+  }
+  
+  .sidebar ul li a:hover {
+    color: white;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  /* Responsividad (pantallas pequeñas) */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .left,
+    .right {
+      width: 100%;
+    }
+  
+    .vertical-text {
+      display: none; /* Puedes mostrarlo si gustas, pero se ve mejor oculto en mobile */
+    }
+  
+    .right {
+      padding: 30px 20px;
+    }
+  
+    h1 {
+      font-size: 1.8em;
+    }
+  
+    h1 small {
+      font-size: 0.9em;
+    }
+  
+    .link-list ul li a {
+      font-size: 1em;
+    }
+  }
+  
+
+/* Efecto fade-in: estado inicial */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px); 
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  /* Estado final */
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    
+    /* Efecto de desvanecimiento */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+  }
+  
+
+  /* Asegurar que la columna derecha alinee su contenido a la izquierda */
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que el contenido esté arriba */
+    align-items: flex-start; /* Alinea el texto a la izquierda */
+    text-align: left; /* Asegura que el texto fluya correctamente */
+}
+
+/* Asegurar que el contenido de texto no se centre */
+.text-content {
+    text-align: left;
+    width: 100%; /* Ocupar todo el ancho disponible */
+}
