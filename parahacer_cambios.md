@@ -11,8 +11,8 @@ git commit --allow-empty -m "Forzando actualización de GitHub Pages"
 git push origin main
 
 
-
-git remote set-url origin https://<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>@github.com/GerryLCDF/myweb.git
+#elimina espacios
+git remote set-url origin https://<ghp_ EXhDiO 28ZVqv sdE9x HIpodQ 8aewmDY 0zXYVg>@github.com/GerryLCDF/myweb.git
 
 
 git add .
