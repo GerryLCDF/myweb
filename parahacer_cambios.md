@@ -14,13 +14,7 @@ git push origin main
 #elimina espacios
 git remote 
 
-set-url origin https://<ghp_ E
-KKKKKKKKKKKKKKKK
-XhDiO 28ZVqv sdE9x HIpodQ 8ae
-KKKKKKKKKKKKKKK
-wmDY 0zXYVg>@github.com/Gerr
-KKKKKKKKKKKKKKKK
-yLCDF/myweb.git
+
 
 
 git add .
