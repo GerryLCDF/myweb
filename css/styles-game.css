@@ -1,0 +1,146 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Tipografía base */
+body {
+    background-color: #222; 
+    color: #fff;
+    font-family: "Source Sans Pro", Arial, sans-serif;
+    transition: filter 0.3s ease;
+}
+
+/* Contenedor principal */
+.g-container {
+    min-height: 100vh;
+    padding: 30px;
+    text-align: center;
+}
+
+/* Caja de contenido */
+.g-inner {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Títulos */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-family: "Playfair Display", serif;
+}
+
+/* Estilos para las tarjetas de proyectos */
+.projects {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.project-card {
+    display: block;
+    width: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* MENÚ HAMBURGUESA */
+.menu-bar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 100;
+}
+.menu-bar .bar {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #111;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 99;
+}
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li {
+    padding: 15px;
+}
+.sidebar ul li a {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+.sidebar ul li a:hover {
+    color: #fff;
+}
+.sidebar.active {
+    left: 0;
+}
+
+/* DIFUMINADO SI EL MENÚ ESTÁ ABIERTO */
+.g-container.blurred,
+.g-inner.blurred {
+    filter: blur(5px);
+}
+
+/* Overlay efecto borroso */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 98;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+/* Si quieres que la segunda sección tenga otro fondo o estilo */
+.g-inner:nth-child(2) {
+    background-color: #282828; /* Un tono diferente */
+}
+
+/* Puedes agregar un margen entre los contenedores */
+.g-inner {
+    margin-bottom: 40px;
+}

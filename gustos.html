@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gustos</title>
+
+  <!-- Google Fonts (ej. Playfair Display y Source Sans Pro) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@300;400;600&display=swap" 
+    rel="stylesheet"
+  >
+  <link rel="icon" href="img/icon.ico" type="image/x-icon">
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="css/style_gustos.css" />
+  <!-- Script con menú hamburguesa, carruseles y fade-in -->
+  <script defer src="js/sjGustos.js"></script>
+</head>
+<body>
+
+  <!-- Menú hamburguesa -->
+  <div class="menu-bar" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <!-- Barra lateral (sidebar) -->
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="bio.html">Bio</a></li>
+      <li><a href="game.html">GAME</a></li>
+      <li><a href="gustos.html">Gustos</a></li>
+      <li><a href="youtube.html">YouTube</a></li>
+      <li><a href="Portfolio.html">Art Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="g-container">
+    <div class="g-inner">
+      
+      <h1 class="fade-in">Gustos:</h1>
+      <p class="contact-description">
+        Estos son algunos de los libros que he leído para aprender sobre Godot y Unity, así como de arte y animación, 
+        los cuales han sido la base de mis conocimientos. Además, encontrarás un listado de mis películas favoritas 
+        o aquellas que me han inspirado a hacer lo que hago.  
+    </p>
+    
+    <p class="contact-description">
+        También he incluido una playlist con mis artistas favoritos o la que probablemente esté escuchando en este preciso momento.
+    </p>
+    
+
+      <!-- Sección de Música con tu iframe de Spotify -->
+      <section class="music-section">
+        <h2>Música:</h2>
+        <iframe style="border-radius:10px" 
+        src="https://open.spotify.com/embed/playlist/7cFKevY9lUNsSKzYixjLig?utm_source=generator" 
+        width="190%" 
+        height="200" 
+        frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+    </iframe>
+      </section>
+
+
+      
+      <!-- Carrusel infinito: LIBROS (fade-in) -->
+      <section class="books-carousel-section fade-in">
+        <h2>Libros:</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev-btn" id="prevBookBtn">&#10094;</button>
+          <div class="carousel-track" id="books-track"></div>
+          <button class="carousel-btn next-btn" id="nextBookBtn">&#10095;</button>
+        </div>
+      </section>
+
+      <!-- Carrusel infinito: PELÍCULAS/ANIME (fade-in) -->
+      <section class="movies-carousel-section fade-in">
+        <h2>Películas/Anime:</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev-btn" id="prevMovieBtn">&#10094;</button>
+          <div class="carousel-track" id="movies-track"></div>
+          <button class="carousel-btn next-btn" id="nextMovieBtn">&#10095;</button>
+        </div>
+      </section>
+
+
+<!-- Carrusel infinito: videojuegos -->
+<section class="games-carousel-section fade-in">
+    <h2>Videojuegos:</h2>
+    <div class="carousel-container">
+        <button class="carousel-btn prev-btn" id="prevGameBtn">&#10094;</button>
+        <div class="carousel-track" id="games-track"></div>
+        <button class="carousel-btn next-btn" id="nextGameBtn">&#10095;</button>
+    </div>
+</section>
+
+    </div> <!-- fin g-inner -->
+  </div> <!-- fin g-container -->
+</body>
+</html>
