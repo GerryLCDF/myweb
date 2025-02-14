@@ -1,5 +1,16 @@
-const API_KEY = "AIzaSyA8pOvmX9azOJeLAztfLrPIKh8fqFIQSxk"; // 🔴 Reemplaza con tu API Key de YouTube
+const API_KEY = "AIzaSyREDACTED"; // 🔴 Reemplaza con tu API Key de YouTube
 const CHANNEL_ID = "UCBvP4UeN3p7a6OevNVdZ3AQ"; // 🔴 Reemplaza con tu ID de canal
+
+/*********************************************
+   MENÚ HAMBURGUESA CON EFECTO BORROSO
+*********************************************/
+function toggleMenu() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+}
 
 // Obtener el número de suscriptores en tiempo real
 async function obtenerSuscriptores() {
@@ -60,23 +71,5 @@ function actualizarEnTiempoReal() {
 // Ejecutar al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
     actualizarEnTiempoReal();
-    setInterval(actualizarEnTiempoReal, 30000); // Actualiza cada 30 segundos
+    setInterval(actualizarEnTiempoReal, 30000);
 });
-
-  /*******************************************
-   Efecto fade-in al cargar la página
-*******************************************/
-document.addEventListener("DOMContentLoaded", () => {
-  // Selecciona todos los .fade-in
-  const fadeEls = document.querySelectorAll('.fade-in');
-
-  fadeEls.forEach((el, index) => {
-    // Retraso de 200ms * index, ajusta si quieres
-    const delay = 200 * index;
-    setTimeout(() => {
-      el.classList.add('visible');
-    }, delay);
-  });
-});
-
-

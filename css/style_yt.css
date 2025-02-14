@@ -1,91 +1,29 @@
-/* Reset y estilos globales */
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #111;
-  color: white;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
+  background-color: #222; 
+  color: #fff;
+  font-family: "Source Sans Pro", Arial, sans-serif;
   transition: filter 0.3s ease;
 }
 
-/* Contenedores generales */
-.youtube-container, .g-inner {
-  max-width: 800px;
-  margin: auto;
-  background-color: #222;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-/* Información del canal */
-.channel-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-#channel-logo, #channel-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-#channel-logo:hover, #channel-image:hover {
-  transform: scale(1.1);
-}
-
-#channel-name { font-size: 24px; }
-#subscriber-count { font-size: 18px; color: #0bf; }
-
-/* Contenedor de videos */
-.latest-videos, .video-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.video-item {
-  text-align: center;
-  width: 180px;
-  background: #333;
-  padding: 10px;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-.video-item:hover { transform: scale(1.05); }
-.video-item img {
-  width: 100%;
-  border-radius: 5px;
-  transition: transform 0.3s ease;
-}
-.video-item img:hover { transform: scale(1.05); }
-.video-item a {
-  display: block;
-  margin-top: 5px;
-  color: #0bf;
-  text-decoration: none;
-}
-.video-item a:hover { text-decoration: underline; }
-
-/* Sidebar y menú hamburguesa */
+/* MENÚ HAMBURGUESA */
 .menu-bar {
   position: fixed;
   top: 20px;
   left: 20px;
   cursor: pointer;
-  z-index: 100;
+  z-index: 101;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
 }
+
 .menu-bar .bar {
   width: 30px;
   height: 4px;
@@ -93,93 +31,152 @@ body {
   margin: 6px 0;
   transition: 0.3s;
 }
+
+/* Sidebar */
 .sidebar {
   position: fixed;
-  left: -250px;
   top: 0;
+  left: -250px;
   width: 250px;
   height: 100%;
-  background: #000;
-  padding-top: 60px;
+  background-color: #111;
   transition: left 0.3s ease;
-  z-index: 99;
+  padding-top: 70px; /* 🔹 Espaciado superior corregido */
+  z-index: 100;
+  text-align: left;
+  padding-left: 20px;
 }
+
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
+
 .sidebar ul li {
   padding: 15px;
   text-align: left;
 }
+
 .sidebar ul li a {
-  color: white;
+  color: #bbb;
   text-decoration: none;
   font-size: 1.2em;
   display: block;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
-.sidebar ul li a:hover { color: #bbb; }
-.sidebar.active { left: 0; }
-.g-container.blurred, .g-inner.blurred { filter: blur(5px); }
 
-/* Carrusel */
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-  border: 2px solid #fff;
-  border-radius: 4px;
+.sidebar ul li a:hover {
+  color: #fff;
 }
-.carousel-track {
-  display: flex;
-  transition: transform 0.4s ease;
+
+/* Activa la barra lateral */
+.sidebar.active {
+  left: 0;
 }
-.carousel-slide {
-  width: 150px;
-  height: 220px;
-  margin: 10px;
-  position: relative;
-  transition: transform 0.3s;
-}
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.carousel-title {
-  position: absolute;
-  bottom: 0;
+
+/* Overlay efecto borroso */
+.overlay {
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  text-align: center;
-  padding: 8px 0;
-  font-size: 14px;
-  font-weight: bold;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 98;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
 }
-.carousel-slide:hover .carousel-title { opacity: 1; }
 
-/* Efecto fade-in */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.fade-in.visible {
+.overlay.active {
   opacity: 1;
-  transform: translateY(0);
+  pointer-events: all;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-  .g-inner h1 { font-size: 2em; }
-  .g-inner h2 { font-size: 1.4em; }
-  .carousel-slide { min-width: 90px; height: 130px; }
+/* Logo del canal */
+#channel-image {
+  width: 80px;  /* 🔹 Ajusta el tamaño del logo */
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  margin: 10px auto; /* 🔹 Centra el logo */
+  object-fit: cover; /* 🔹 Asegura que no se deforme */
+  transition: transform 0.3s ease;
+}
+
+#channel-image:hover {
+  transform: scale(1.1); /* 🔹 Efecto de zoom al pasar el mouse */
+}
+
+
+/* Contenedor principal */
+.youtube-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  margin: auto;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+/* Contenedor de información del canal */
+.channel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 🔹 Centra todo horizontalmente */
+  justify-content: center;
+  gap: 10px; /* 🔹 Espacio entre elementos */
+}
+
+/* Logo del canal */
+#channel-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+  margin: 10px auto; /* 🔹 Centrado */
+}
+
+#channel-image:hover {
+  transform: scale(1.1);
+}
+
+/* Nombre y suscriptores del canal */
+#channel-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#subscriber-count {
+  font-size: 1em;
+  color: #0bf;
+}
+
+/* Ajuste del menú hamburguesa */
+.menu-bar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 101;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu-bar .bar {
+  width: 30px;
+  height: 4px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.3s;
 }
