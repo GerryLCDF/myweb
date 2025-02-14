@@ -114,27 +114,61 @@ document.addEventListener("DOMContentLoaded", function () {
     const libros = [
         { src: "img/libros/Berserk.jpg", title: "Berserk" },
         { src: "img/libros/Godot Engine Game Development Projects.jpg", title: "Godot Engine Game Development Projects" },
-        { src: "img/libros/H.P LOVECRAFT.jpg", title: "H.P LOVECRAFT" },
+        { src: "img/libros/H.P LOVECRAFT.jpg", title: "H.P. Lovecraft" },
         { src: "img/libros/How To Draw Ghibli Studio Characters.jpg", title: "How To Draw Ghibli Studio Characters" },
-        { src: "img/libros/Komi Can’t Communicate, All.jpg", title: "Komi Can’t Communicate, All" },
+        { src: "img/libros/Komi Can’t Communicate, All.jpg", title: "Komi Can't Communicate (All Volumes)" },
         { src: "img/libros/La Divina Comedia.jpg", title: "La Divina Comedia" },
-        { src: "img/libros/La nada nadea.jpg", title: "La nada nadea" },
+        { src: "img/libros/La nada nadea.jpg", title: "La Nada Nadae" },
+        { src: "img/libros/La Poetica De Aristoteles.jpg", title: "La Poética de Aristóteles" },
         { src: "img/libros/Learning Python.jpg", title: "Learning Python" },
-        { src: "img/libros/Ranma ½.jpg", title: "Ranma ½" }
+        { src: "img/libros/Matar a Platón.jpg", title: "Matar a Platón" },
+        { src: "img/libros/Matemática Esencial para Game Devs.jpg", title: "Matemática Esencial para Game Devs" },
+        { src: "img/libros/Ranma ½.jpg", title: "Ranma ½ (All Volumes)" },
+        { src: "img/libros/Tecnicas de animacion.jpg", title: "Técnicas de Animación" },
+        { src: "img/libros/Test Drive Blender.jpg", title: "Test Drive Blender" },
+        { src: "img/libros/The Game Dev Roadmap.jpg", title: "The Game Dev Roadmap" },
+        { src: "img/libros/Unity3D.jpg", title: "Unity3D" },
+        { src: "img/libros/zelda-majora.jpg", title: "Zelda: Majora’s Mask" }
     ];
+    
 
     const peliculas = [
-        { src: "img/peliculas/totoro.webp", title: "Película 1" },
-        { src: "img/peliculas/peli2.jpg", title: "Película 2" }
+
+    { src: "img/peliculas/totoro.webp", title: "Mi vecino Totoro" },
+    { src: "img/peliculas/back_to_the_future.jpg", title: "Back to the Future" },
+    { src: "img/peliculas/ready_player_one.jpg", title: "Ready Player One" },
+    { src: "img/peliculas/drStrange.jpg", title: "Doctor Strange" },
+    { src: "img/peliculas/baby_driver.webp", title: "Baby Driver" },
+    { src: "img/peliculas/interstellar.webp", title: "Interstellar" },
+    { src: "img/peliculas/invecil.jpg", title: "Invincible" },
+    { src: "img/peliculas/dr who.jpg", title: "Doctor Who" },
+    { src: "img/peliculas/indise_job.jpg", title: "Inside Job" },
+    { src: "img/peliculas/kikis.jpg", title: "Kiki's Delivery Service" },
+    { src: "img/peliculas/kira.jpg", title: "Akira" },
+    { src: "img/peliculas/naufrago.jpg", title: "Náufrago" },
+    { src: "img/peliculas/the_office.jpg", title: "The Office" },
+    { src: "img/peliculas/Guardians of the Galaxy.jpg", title: "Guardians of the Galaxy" },
+    { src: "img/peliculas/ambulante.jpg", title: "Ambulante" }
+    
     ];
 
     const games = [
         { src: "img/games/BLASPHEMOUS.png", title: "BLASPHEMOUS" },
         { src: "img/games/BLASPHEMOUS2.png", title: "BLASPHEMOUS 2" },
         { src: "img/games/CELESTE.png", title: "CELESTE" },
+        { src: "img/games/CULT OF THE LAMB.png", title: "CULT OF THE LAMB." },
         { src: "img/games/CUPHEAD.png", title: "CUPHEAD" },
+        { src: "img/games/FALLOUT NV.png", title: "fallout NV" },
         { src: "img/games/HOLLOW KNIGHT.png", title: "HOLLOW KNIGHT" },
-        { src: "img/games/METAL SLUG.png", title: "METAL SLUG" }
+        { src: "img/games/marioWorld.jpg", title: "Mario world" },
+        { src: "img/games/METAL SLUG.png", title: "METAL SLUG" },
+        { src: "img/games/PARTY ANIMALS.png", title: "PARTY ANIMALS" },
+        { src: "img/games/RED DEAD REdemption2.png", title: "Res Dead Redemption 2" },
+        { src: "img/games/super64.webp", title: "mario 64" },
+        { src: "img/games/TAILS OF IRON.png", title: "TAILS OF IRON" },
+        { src: "img/games/TUNIC.png", title: "TUNIC" },
+        { src: "img/games/VVVVVV.png", title: "VVVVVV" },
+        { src: "img/games/zelda.webp", title: "zelda" }
     ];
 
     // Generar los carruseles con las listas
