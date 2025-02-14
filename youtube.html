@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -8,22 +8,21 @@
   <!-- Hoja de estilos -->
   <link rel="stylesheet" href="css/style_yt.css">
   <link rel="icon" href="img/icon.ico" type="image/x-icon">
+
   <!-- Script JavaScript -->
   <script defer src="js/sjyoutube.js"></script>
-  <script defer src="js/script.js"></script>
 </head>
 <body>
 
   <!-- Menú hamburguesa -->
   <div class="menu-bar" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
 
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-
-</div>
-<!-- Overlay para efecto borroso -->
-<div class="overlay" id="overlay"></div>
+  <!-- Overlay para efecto borroso -->
+  <div class="overlay" id="overlay"></div>
 
   <!-- Barra lateral (sidebar) -->
   <div class="sidebar" id="sidebar">
@@ -32,11 +31,12 @@
       <li><a href="bio.html">Bio</a></li>
       <li><a href="game.html">GAME</a></li>
       <li><a href="gustos.html">Gustos</a></li>
-      <li><a href="youtube.html">Youtube</a></li>
+      <li><a href="youtube.html">YouTube</a></li>
       <li><a href="Portfolio.html">Art Portfolio</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
+
   <!-- Contenedor principal -->
   <div class="youtube-container fade-in">
     <div class="channel-info fade-in">
@@ -47,15 +47,14 @@
         </a>
 
         <h2 id="channel-name" class="fade-in">LCDF</h2>
-        <p id="subscriber-count" class="fade-in">27 suscriptores</p>
+        <p id="subscriber-count" class="fade-in">Cargando suscriptores...</p>
     </div>
 
     <h3 class="fade-in">Videos del canal:</h3>
     <div id="recent-videos" class="video-container fade-in">
         <!-- Aquí se generarán los videos dinámicamente -->
     </div>
-</div>
-
+  </div>
 
 </body>
 </html>
