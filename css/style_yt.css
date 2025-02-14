@@ -1,516 +1,185 @@
-.youtube-container {
-    text-align: center;
-    max-width: 800px;
-    margin: 50px auto;
+/* Reset y estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+  transition: filter 0.3s ease;
 }
 
+/* Contenedores generales */
+.youtube-container, .g-inner {
+  max-width: 800px;
+  margin: auto;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Información del canal */
 .channel-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
-#channel-logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
+#channel-logo, #channel-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+#channel-logo:hover, #channel-image:hover {
+  transform: scale(1.1);
 }
 
-#channel-logo:hover {
-    transform: scale(1.1);
-}
+#channel-name { font-size: 24px; }
+#subscriber-count { font-size: 18px; color: #0bf; }
 
-#channel-name {
-    font-size: 24px;
-}
-
-#subscriber-count {
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-.latest-videos {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+/* Contenedor de videos */
+.latest-videos, .video-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .video-item {
-    text-align: center;
-    max-width: 200px;
+  text-align: center;
+  width: 180px;
+  background: #333;
+  padding: 10px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
-
+.video-item:hover { transform: scale(1.05); }
 .video-item img {
-    width: 100%;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+  width: 100%;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
 }
-
-.video-item img:hover {
-    transform: scale(1.05);
+.video-item img:hover { transform: scale(1.05); }
+.video-item a {
+  display: block;
+  margin-top: 5px;
+  color: #0bf;
+  text-decoration: none;
 }
+.video-item a:hover { text-decoration: underline; }
 
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #181818;
-    color: white;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  /* Contenedor principal */
-  .youtube-container {
-    max-width: 600px;
-    margin: auto;
-    background-color: #222;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Información del canal */
-  .channel-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Imagen del canal (botón) */
-  #channel-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  #channel-image:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Nombre del canal */
-  #channel-name {
-    font-size: 24px;
-    margin: 5px 0;
-  }
-  
-  /* Contador de suscriptores */
-  #subscriber-count {
-    font-size: 18px;
-    color: #0bf;
-  }
-  
-  /* Contenedor de videos */
-  .video-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  /* Estilos para cada video */
-  .video-item {
-    width: 180px;
-    background: #333;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .video-item:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Miniaturas de los videos */
-  .video-item img {
-    width: 100%;
-    border-radius: 5px;
-  }
-  
-  /* Enlaces de los videos */
-  .video-item a {
-    display: block;
-    margin-top: 5px;
-    color: #0bf;
-    text-decoration: none;
-  }
-  
-  .video-item a:hover {
-    text-decoration: underline;
-  }
-  
-  /* --- MENÚ HAMBURGUESA --- */
-  .menu-bar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 10;
-  }
-  
-  .bar {
-    width: 30px;
-    height: 4px;
-    background-color: white;
-    margin: 6px 0;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: #111;
-    padding-top: 60px;
-    transition: 0.3s;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 15px;
-    text-align: left;
-  }
-  
-  .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .sidebar ul li:hover {
-    background: #333;
-  }
-  
-  /* Mostrar menú */
-  .sidebar.open {
-    left: 0;
-  }
-  
-
-
-
-  
-
-  /********************************************************
-  ESTILOS PARA LA PÁGINA DE GUSTOS
-********************************************************/
-
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Tipografía base: Source Sans Pro */
-  body {
-    background-color: #111; 
-    color: #fff;
-    font-family: "Source Sans Pro", Arial, sans-serif;
-    transition: filter 0.3s ease;
-  }
-  
-  /* Títulos con Playfair Display */
-  h1, h2 {
-    font-family: "Playfair Display", serif;
-  }
-  
-  /* Contenedor principal */
-  .g-container {
-    min-height: 100vh;
-    padding: 30px;
-    /* Si tu sidebar es fija (250px), podrías usar margin-left: 250px; */
-  }
-  
-  /* Caja interna con fondo #222 */
-  .g-inner {
-    background-color: #222;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 900px;
-    margin: 0 auto; 
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
-  
-  /* Encabezados */
-  .g-inner h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-  .g-inner h2 {
-    font-size: 1.8em;
-    margin: 20px 0 10px;
-    color: #fff;
-  }
-  
-  /* Iframe de Spotify (borde, radio, etc.) */
-  .music-section iframe {
-    width: 100%;
-    max-width: 800px;
-    border: 2px solid #fff;
-    border-radius: 12px;
-  }
-  
-  /* MENÚ HAMBURGUESA Y SIDEBAR */
-  .menu-bar {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 100;
-  }
-  .menu-bar .bar {
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    margin: 6px 0;
-    transition: 0.3s;
-  }
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: #000;
-    transition: left 0.3s ease;
-    padding-top: 60px;
-    z-index: 99;
-  }
-  .sidebar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .sidebar ul li {
-    padding: 15px;
-  }
-  .sidebar ul li a {
-    color: #bbb;
-    text-decoration: none;
-    font-size: 1.2em;
-    display: block;
-    transition: color 0.3s;
-  }
-  .sidebar ul li a:hover {
-    color: #fff;
-  }
-  .sidebar.active {
-    left: 0;
-  }
-  
-  /* DIFUMINADO SI ABRES SIDEBAR */
-  .g-container.blurred,
-  .g-inner.blurred {
-    filter: blur(5px);
-  }
-  
-  /* CARRUSEL INFINITO */
-  .carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    border: 2px solid #fff;
-    border-radius: 4px;
-  }
-  
-  .carousel-track {
-    display: flex;
-    transition: transform 0.4s ease;
-  }
-  
-  /* Slide (tarjeta) de cada libro/película */
-  .carousel-slide {
-    min-width: 120px;
-    height: 180px;
-    margin: 10px;
-    background-color: #333;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    position: relative;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-  .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* Botones flecha */
-  .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: #fff;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    z-index: 10;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    border-radius: 50%;
-    line-height: 40px;
-  }
-  .prev-btn {
-    left: 10px;
-  }
-  .next-btn {
-    right: 10px;
-  }
-  .carousel-btn:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-  
-  /* RESPONSIVIDAD */
-  @media (max-width: 768px) {
-    .g-inner h1 {
-      font-size: 2em;
-    }
-    .g-inner h2 {
-      font-size: 1.4em;
-    }
-    .carousel-slide {
-      min-width: 90px;
-      height: 130px;
-    }
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  
-  /* Estado final (cuando se añade .visible por JS) */
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-/* Estilos para los elementos del carrusel */
-.carousel-item {
-    position: relative;
-    display: inline-block;
-    width: 150px;
-    height: 220px;
-    margin: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+/* Sidebar y menú hamburguesa */
+.menu-bar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 100;
 }
-
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+.menu-bar .bar {
+  width: 30px;
+  height: 4px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.3s;
 }
-
-/* Estilos para el recuadro de título */
-.carousel-title {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Color negro con transparencia */
-    color: white;
-    text-align: center;
-    padding: 8px 0;
-    font-size: 14px;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background: #000;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 99;
 }
-
-/* Mostrar el título cuando el cursor pasa por encima */
-.carousel-item:hover .carousel-title {
-    opacity: 1;
+.sidebar ul {
+  list-style: none;
+  padding: 0;
 }
+.sidebar ul li {
+  padding: 15px;
+  text-align: left;
+}
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  display: block;
+  transition: color 0.3s;
+}
+.sidebar ul li a:hover { color: #bbb; }
+.sidebar.active { left: 0; }
+.g-container.blurred, .g-inner.blurred { filter: blur(5px); }
 
+/* Carrusel */
 .carousel-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  border: 2px solid #fff;
+  border-radius: 4px;
 }
-
 .carousel-track {
-    display: flex;
-    transition: transform 0.4s ease-in-out;
+  display: flex;
+  transition: transform 0.4s ease;
 }
-
 .carousel-slide {
-    width: 150px;
-    height: 220px;
-    margin: 10px;
-    position: relative;
-    transition: transform 0.3s;
+  width: 150px;
+  height: 220px;
+  margin: 10px;
+  position: relative;
+  transition: transform 0.3s;
 }
-
 .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
-
 .carousel-title {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    text-align: center;
-    padding: 8px 0;
-    font-size: 14px;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
+.carousel-slide:hover .carousel-title { opacity: 1; }
 
-.carousel-slide:hover .carousel-title {
-    opacity: 1;
-}
-
-  
-/* Efecto fade-in: estado inicial */
+/* Efecto fade-in */
 .fade-in {
-    opacity: 0;
-    transform: translateY(20px); 
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  
-  /* Estado final */
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  .image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
+/* Responsividad */
+@media (max-width: 768px) {
+  .g-inner h1 { font-size: 2em; }
+  .g-inner h2 { font-size: 1.4em; }
+  .carousel-slide { min-width: 90px; height: 130px; }
+}
