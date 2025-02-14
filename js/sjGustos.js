@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const peliculas = [
-        { src: "img/peliculas/peli1.jpg", title: "Película 1" },
+        { src: "img/peliculas/totoro.webp", title: "Película 1" },
         { src: "img/peliculas/peli2.jpg", title: "Película 2" }
     ];
 
