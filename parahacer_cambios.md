@@ -1,4 +1,4 @@
 git status    
 git add .   
-git commit -m "agrege info extras"   
+git commit -m "modifique el bio"   
 git push origin main
