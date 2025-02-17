@@ -168,7 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { src: "img/games/TAILS OF IRON.png", title: "TAILS OF IRON" },
         { src: "img/games/TUNIC.png", title: "TUNIC" },
         { src: "img/games/VVVVVV.png", title: "VVVVVV" },
-        { src: "img/games/zelda.webp", title: "zelda" }
+        { src: "img/games/issac.png", title: "The binding of issac" },
+        { src: "img/games/zelda.webp", title: "The leguen of zelda " }
     ];
 
     // Generar los carruseles con las listas
