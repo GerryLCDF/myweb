@@ -146,6 +146,44 @@ body {
     color: #181f45;
 }
 
+/* Botón de GitHub */
+.github-button {
+    background-color: #24292e;
+    border: 2px solid #6e7681;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 1.1em;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.github-button:hover {
+    background-color: #6e7681;
+    color: #24292e;
+}
+
+/* Botón de Página Web */
+.web-button {
+    background-color: #005f73;
+    border: 2px solid #94d2bd;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 1.1em;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.web-button:hover {
+    background-color: #94d2bd;
+    color: #005f73;
+}
+
+
+
 
 /* Información del juego */
 .game-info, .game-story, .game-features {
