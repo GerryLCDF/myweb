@@ -125,15 +125,16 @@ async function obtenerVideosLargos() {
     }
 }
 
-function actualizarEnTiempoReal() {
+document.addEventListener("DOMContentLoaded", () => {
+    // Carga inicial de todo
     obtenerSuscriptores();
     obtenerShorts();
     obtenerVideosLargos();
-}
 
-document.addEventListener("DOMContentLoaded", () => {
-    actualizarEnTiempoReal();
-    setInterval(actualizarEnTiempoReal, 1200000); // 20 minutos
+    // Actualizaciones periódicas (para no agotar la cuota diaria de la API)
+    setInterval(obtenerSuscriptores, 3600000);      // suscriptores: cada 1 hora
+    setInterval(obtenerShorts, 43200000);           // shorts: cada 12 horas
+    setInterval(obtenerVideosLargos, 43200000);     // videos largos: cada 12 horas
 
     // Aplicar el efecto fade-in a los elementos con esa clase
     const fadeEls = document.querySelectorAll('.fade-in');
