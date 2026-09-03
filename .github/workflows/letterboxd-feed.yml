@@ -1,0 +1,72 @@
+name: Actualizar feed de Letterboxd
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # cada 6 horas
+  workflow_dispatch:        # permite ejecutarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Descargar y procesar feed de Letterboxd
+        run: |
+          python3 - <<'EOF'
+          import json, urllib.request, xml.etree.ElementTree as ET
+
+          USER = "gerardo_lcdf"
+          FEED_URL = f"https://letterboxd.com/{USER}/rss/"
+          OUT_FILE = "js/gustos.json"
+
+          peliculas = []
+
+          try:
+              req = urllib.request.Request(
+                  FEED_URL,
+                  headers={"User-Agent": "Mozilla/5.0 (myweb-updater)"}
+              )
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  data = resp.read()
+              root = ET.fromstring(data)
+              ns = {"l": "https://letterboxd.com"}
+              for item in root.findall("./channel/item"):
+                  titulo = (item.findtext("title") or "").strip()
+                  enlace = (item.findtext("link") or "").strip()
+                  desc = (item.findtext("description") or "")
+                  imagen = None
+                  # Letterboxd suele incluir una <description> con el HTML de la portada
+                  if desc:
+                      import re
+                      m = re.search(r'src="([^"]+)"', desc)
+                      if m:
+                          imagen = m.group(1)
+                  peliculas.append({
+                      "titulo": titulo,
+                      "url": enlace,
+                      "imagen": imagen
+                  })
+          except Exception as e:
+              # Si falla, dejamos la lista vacía y guardamos el error
+              peliculas = []
+
+          with open(OUT_FILE, "w", encoding="utf-8") as f:
+              json.dump(peliculas, f, ensure_ascii=False, indent=2)
+          print(f"Películas encontradas: {len(peliculas)}")
+          EOF
+
+      - name: Commit y push de los cambios
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Actualiza feed de Letterboxd [skip ci]"
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git push origin HEAD:${{ github.ref }}

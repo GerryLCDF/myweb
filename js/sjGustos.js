@@ -158,6 +158,44 @@ document.addEventListener("DOMContentLoaded", function () {
     // Inicializar los carruseles
     new InfiniteCarousel("books-track", "prevBookBtn", "nextBookBtn");
     new InfiniteCarousel("games-track", "prevGameBtn", "nextGameBtn");
+
+    // Carrusel de películas desde Letterboxd (js/gustos.json)
+    const letterboxdTrack = document.getElementById("letterboxd-track");
+    if (letterboxdTrack) {
+        fetch("/js/gustos.json", { cache: "no-store" })
+            .then(r => r.json())
+            .then(peliculas => {
+                if (!peliculas || peliculas.length === 0) {
+                    letterboxdTrack.innerHTML =
+                        "<p class='sin-videos'>Aún no hay películas en mi Letterboxd</p>";
+                    return;
+                }
+                const items = peliculas.filter(p => p.imagen);
+                items.forEach(p => {
+                    const div = document.createElement("div");
+                    div.classList.add("carousel-item", "letterboxd-item");
+                    const a = document.createElement("a");
+                    a.href = p.url;
+                    a.target = "_blank";
+                    a.rel = "noopener";
+                    const img = document.createElement("img");
+                    img.src = p.imagen;
+                    img.alt = p.titulo;
+                    const title = document.createElement("div");
+                    title.classList.add("carousel-title");
+                    title.textContent = p.titulo;
+                    a.appendChild(img);
+                    a.appendChild(title);
+                    div.appendChild(a);
+                    letterboxdTrack.appendChild(div);
+                });
+                new InfiniteCarousel("letterboxd-track", "prevLetterboxdBtn", "nextLetterboxdBtn");
+            })
+            .catch(err => {
+                console.error("Error cargando Letterboxd:", err);
+                letterboxdTrack.innerHTML = "<p class='sin-videos'>No se pudo cargar Letterboxd</p>";
+            });
+    }
 });
 
 
