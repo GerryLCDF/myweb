@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Referencias a los tracks
     const booksTrack = document.getElementById("books-track");
-    const moviesTrack = document.getElementById("movies-track");
     const gamesTrack = document.getElementById("games-track");
 
     // Listas de elementos para cada carrusel
@@ -132,26 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
     
 
-    const peliculas = [
-
-    { src: "img/peliculas/totoro.webp", title: "Mi vecino Totoro" },
-    { src: "img/peliculas/back_to_the_future.jpg", title: "Back to the Future" },
-    { src: "img/peliculas/ready_player_one.jpg", title: "Ready Player One" },
-    { src: "img/peliculas/drStrange.jpg", title: "Doctor Strange" },
-    { src: "img/peliculas/baby_driver.webp", title: "Baby Driver" },
-    { src: "img/peliculas/interstellar.webp", title: "Interstellar" },
-    { src: "img/peliculas/invecil.jpg", title: "Invincible" },
-    { src: "img/peliculas/dr who.jpg", title: "Doctor Who" },
-    { src: "img/peliculas/indise_job.jpg", title: "Inside Job" },
-    { src: "img/peliculas/kikis.jpg", title: "Kiki's Delivery Service" },
-    { src: "img/peliculas/kira.jpg", title: "Akira" },
-    { src: "img/peliculas/naufrago.jpg", title: "Náufrago" },
-    { src: "img/peliculas/the_office.jpg", title: "The Office" },
-    { src: "img/peliculas/Guardians of the Galaxy.jpg", title: "Guardians of the Galaxy" },
-    { src: "img/peliculas/ambulante.jpg", title: "Ambulante" }
-    
-    ];
-
     const games = [
         { src: "img/games/BLASPHEMOUS.png", title: "BLASPHEMOUS" },
         { src: "img/games/BLASPHEMOUS2.png", title: "BLASPHEMOUS 2" },
@@ -174,12 +153,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Generar los carruseles con las listas
     createCarouselItems(booksTrack, libros);
-    createCarouselItems(moviesTrack, peliculas);
     createCarouselItems(gamesTrack, games);
 
     // Inicializar los carruseles
     new InfiniteCarousel("books-track", "prevBookBtn", "nextBookBtn");
-    new InfiniteCarousel("movies-track", "prevMovieBtn", "nextMovieBtn");
     new InfiniteCarousel("games-track", "prevGameBtn", "nextGameBtn");
 });
 

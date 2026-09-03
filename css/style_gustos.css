@@ -123,6 +123,54 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Tarjeta de enlace al perfil de Letterboxd */
+.letterboxd-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 420px;
+  margin: 10px auto;
+  padding: 15px 18px;
+  background-color: #1b1b1b;
+  border: 1px solid #555;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.letterboxd-card:hover {
+  transform: scale(1.02);
+  border-color: #00b020;
+}
+
+.letterboxd-logo {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00b020;
+  color: #fff;
+  font-size: 1.6em;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.letterboxd-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.letterboxd-text small {
+  color: #aaa;
+  margin-top: 2px;
+}
+
 /* RESPONSIVIDAD */
 @media (max-width: 768px) {
   .g-inner h1 {
