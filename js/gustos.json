@@ -3,5 +3,30 @@
     "titulo": "Spider-Man: Sin camino a casa",
     "url": "https://www.themoviedb.org/movie/634649",
     "imagen": "https://image.tmdb.org/t/p/w500/9OGkKMnYgSc0TzSIErcOOiKllrK.jpg"
+  },
+  {
+    "titulo": "Baby: El aprendiz del crimen",
+    "url": "https://www.themoviedb.org/movie/339403",
+    "imagen": "https://image.tmdb.org/t/p/w500/3eycDWupJWpAF7Pu8TIxNxGrS0Z.jpg"
+  },
+  {
+    "titulo": "Ready Player One: Comienza el juego",
+    "url": "https://www.themoviedb.org/movie/333339",
+    "imagen": "https://image.tmdb.org/t/p/w500/fdfE1EtrGgfjxOMaPZ2FBrgMIgG.jpg"
+  },
+  {
+    "titulo": "Cowboy Bebop",
+    "url": "https://www.themoviedb.org/movie/30991",
+    "imagen": "https://image.tmdb.org/t/p/w500/hbLDwYri1pyiEIMpICgftu7s8NE.jpg"
+  },
+  {
+    "titulo": "Cowboy Bebop",
+    "url": "https://www.themoviedb.org/movie/84469",
+    "imagen": "https://image.tmdb.org/t/p/w500/lSsCxZ1dnjcB4cmXSgMJt5qunOu.jpg"
+  },
+  {
+    "titulo": "Rick y Morty",
+    "url": "https://www.themoviedb.org/movie/60625",
+    "imagen": "https://image.tmdb.org/t/p/w500/arSWOHGl9uQvhDrWjgyl3aaypca.jpg"
   }
 ]
