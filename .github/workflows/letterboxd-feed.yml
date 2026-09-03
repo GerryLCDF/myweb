@@ -1,4 +1,4 @@
-name: Actualizar feed de Letterboxd
+name: Actualizar carrusel de películas (TMDb)
 
 on:
   schedule:
@@ -17,49 +17,40 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Descargar y procesar feed de Letterboxd
+      - name: Descargar la lista WebMovie de TMDb y generar el JSON
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
           python3 - <<'EOF'
-          import json, urllib.request, xml.etree.ElementTree as ET
+          import json, os, urllib.request
 
-          USER = "gerardo_lcdf"
-          FEED_URL = f"https://letterboxd.com/{USER}/rss/"
+          KEY = os.environ["TMDB_API_KEY"]
+          LIST_ID = 8691519   # lista "WebMovie"
           OUT_FILE = "js/gustos.json"
 
-          peliculas = []
-
+          url = f"https://api.themoviedb.org/3/list/{LIST_ID}?api_key={KEY}&language=es-MX"
           try:
-              req = urllib.request.Request(
-                  FEED_URL,
-                  headers={"User-Agent": "Mozilla/5.0 (myweb-updater)"}
-              )
-              with urllib.request.urlopen(req, timeout=30) as resp:
-                  data = resp.read()
-              root = ET.fromstring(data)
-              ns = {"l": "https://letterboxd.com"}
-              for item in root.findall("./channel/item"):
-                  titulo = (item.findtext("title") or "").strip()
-                  enlace = (item.findtext("link") or "").strip()
-                  desc = (item.findtext("description") or "")
-                  imagen = None
-                  # Letterboxd suele incluir una <description> con el HTML de la portada
-                  if desc:
-                      import re
-                      m = re.search(r'src="([^"]+)"', desc)
-                      if m:
-                          imagen = m.group(1)
-                  peliculas.append({
-                      "titulo": titulo,
-                      "url": enlace,
-                      "imagen": imagen
-                  })
+              with urllib.request.urlopen(url, timeout=30) as resp:
+                  data = json.load(resp)
           except Exception as e:
-              # Si falla, dejamos la lista vacía y guardamos el error
-              peliculas = []
+              print("Error consultando TMDb:", e)
+              data = {"items": []}
+
+          peliculas = []
+          for it in data.get("items", []):
+              title = it.get("title") or it.get("name") or it.get("original_title") or ""
+              img = None
+              if it.get("poster_path"):
+                  img = "https://image.tmdb.org/t/p/w500" + it["poster_path"]
+              peliculas.append({
+                  "titulo": title,
+                  "url": f"https://www.themoviedb.org/movie/{it.get('id')}",
+                  "imagen": img
+              })
 
           with open(OUT_FILE, "w", encoding="utf-8") as f:
               json.dump(peliculas, f, ensure_ascii=False, indent=2)
-          print(f"Películas encontradas: {len(peliculas)}")
+          print(f"Películas en carrusel: {len(peliculas)}")
           EOF
 
       - name: Commit y push de los cambios
@@ -67,6 +58,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --cached --quiet || git commit -m "Actualiza feed de Letterboxd [skip ci]"
+          git diff --cached --quiet || git commit -m "Actualiza carrusel de películas desde TMDb [skip ci]"
           git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           git push origin HEAD:${{ github.ref }}

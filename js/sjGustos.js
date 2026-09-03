@@ -159,21 +159,21 @@ document.addEventListener("DOMContentLoaded", function () {
     new InfiniteCarousel("books-track", "prevBookBtn", "nextBookBtn");
     new InfiniteCarousel("games-track", "prevGameBtn", "nextGameBtn");
 
-    // Carrusel de películas desde Letterboxd (js/gustos.json)
-    const letterboxdTrack = document.getElementById("letterboxd-track");
-    if (letterboxdTrack) {
+    // Carrusel de películas desde TMDb (js/gustos.json)
+    const peliculasTrack = document.getElementById("tmdb-track");
+    if (peliculasTrack) {
         fetch("/js/gustos.json", { cache: "no-store" })
             .then(r => r.json())
             .then(peliculas => {
                 if (!peliculas || peliculas.length === 0) {
-                    letterboxdTrack.innerHTML =
-                        "<p class='sin-videos'>Aún no hay películas en mi Letterboxd</p>";
+                    peliculasTrack.innerHTML =
+                        "<p class='sin-videos'>Aún no hay películas en mi lista WebMovie</p>";
                     return;
                 }
                 const items = peliculas.filter(p => p.imagen);
                 items.forEach(p => {
                     const div = document.createElement("div");
-                    div.classList.add("carousel-item", "letterboxd-item");
+                    div.classList.add("carousel-item", "tmdb-item");
                     const a = document.createElement("a");
                     a.href = p.url;
                     a.target = "_blank";
@@ -187,13 +187,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     a.appendChild(img);
                     a.appendChild(title);
                     div.appendChild(a);
-                    letterboxdTrack.appendChild(div);
+                    peliculasTrack.appendChild(div);
                 });
-                new InfiniteCarousel("letterboxd-track", "prevLetterboxdBtn", "nextLetterboxdBtn");
+                new InfiniteCarousel("tmdb-track", "prevPeliculaBtn", "nextPeliculaBtn");
             })
             .catch(err => {
-                console.error("Error cargando Letterboxd:", err);
-                letterboxdTrack.innerHTML = "<p class='sin-videos'>No se pudo cargar Letterboxd</p>";
+                console.error("Error cargando TMDb:", err);
+                peliculasTrack.innerHTML = "<p class='sin-videos'>No se pudo cargar TMDb</p>";
             });
     }
 });

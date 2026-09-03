@@ -123,14 +123,14 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Carrusel de Letterboxd */
-.letterboxd-item a {
+/* Carrusel de películas (TMDb) */
+.tmdb-item a {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.letterboxd-item img {
+.tmdb-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
