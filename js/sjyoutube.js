@@ -22,6 +22,15 @@ async function obtenerSuscriptores() {
     }
 }
 
+// Convertir duración ISO8601 a segundos
+function parseISO8601Duration(duration) {
+    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+    const hours = parseInt(match[1]) || 0;
+    const minutes = parseInt(match[2]) || 0;
+    const seconds = parseInt(match[3]) || 0;
+    return hours * 3600 + minutes * 60 + seconds;
+}
+
 // Obtener duraciones de videos
 async function obtenerDuraciones(videoIds) {
     const ids = videoIds.join(",");
@@ -37,82 +46,104 @@ async function obtenerDuraciones(videoIds) {
     return duraciones;
 }
 
-// Convertir duración ISO8601 a segundos
-function parseISO8601Duration(duration) {
-    const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
-    const minutes = parseInt(match[1]) || 0;
-    const seconds = parseInt(match[2]) || 0;
-    return minutes * 60 + seconds;
+// Obtener videos del canal filtrando por tipo de duración
+// duracionTipo: "short", "medium" o "long" (valores admitidos por la API)
+async function obtenerVideosPorTipo(duracionTipo, maxResultados) {
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}` +
+        `&channelId=${CHANNEL_ID}&part=snippet,id&order=date&type=video` +
+        `&videoDuration=${duracionTipo}&maxResults=${maxResultados}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.items || [];
 }
 
-// Obtener y mostrar videos largos
-async function obtenerVideosRecientes() {
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=8`; // Cambié a 8 para obtener más videos
+// Crear el elemento HTML de un video y lo agrega a su contenedor
+function crearElementoVideo(video, contenedor) {
+    const id = video.id.videoId;
+    const titulo = video.snippet.title;
+    const miniatura = video.snippet.thumbnails.high.url;
+    const urlVideo = `https://www.youtube.com/watch?v=${id}`;
+
+    const videoElement = document.createElement("div");
+    videoElement.classList.add("video-item");
+    videoElement.innerHTML = `
+        <a href="${urlVideo}" target="_blank">
+            <img src="${miniatura}" alt="${titulo}">
+        </a>
+        <p>${titulo}</p>
+        <a href="${urlVideo}" target="_blank">Ver en YouTube</a>
+    `;
+    contenedor.appendChild(videoElement);
+}
+
+// Obtener y mostrar shorts (videoDuration=short)
+async function obtenerShorts() {
+    const contenedorShorts = document.getElementById("shorts-videos");
+    contenedorShorts.innerHTML = "";
+
     try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const items = await obtenerVideosPorTipo("short", 8);
 
-        const videoItems = data.items.filter(item => item.id.videoId); // Filtrar solo los videos
-        const videoIds = videoItems.map(video => video.id.videoId);
-        const duraciones = await obtenerDuraciones(videoIds);
+        // Filtrar solo los Shorts reales (menos de 60 segundos) por si la API mezcla
+        const ids = items.map(v => v.id.videoId);
+        const duraciones = await obtenerDuraciones(ids);
 
-        const contenedorLargos = document.getElementById("recent-videos");
-        const contenedorShorts = document.getElementById("shorts-videos");
-
-        contenedorLargos.innerHTML = "";
-        contenedorShorts.innerHTML = "";
-
-        let contadorLargos = 0; // Para asegurar que solo se muestren 3 videos largos
-        let contadorShorts = 0; // Para asegurar que solo se muestren 5 shorts
-
-        videoItems.forEach(video => {
-            const id = video.id.videoId;
-            const duracion = duraciones[id];
-            const esShort = duracion < 60;
-
-            const titulo = video.snippet.title;
-            const miniatura = video.snippet.thumbnails.high.url;
-            const urlVideo = `https://www.youtube.com/watch?v=${id}`;
-
-            const contenedor = esShort ? contenedorShorts : contenedorLargos;
-
-            if (esShort && contadorShorts < 5) { // Mostrar solo 5 Shorts
-                const videoElement = document.createElement("div");
-                videoElement.classList.add("video-item");
-                videoElement.innerHTML = `
-                    <a href="${urlVideo}" target="_blank">
-                        <img src="${miniatura}" alt="${titulo}">
-                    </a>
-                    <p>${titulo}</p>
-                    <a href="${urlVideo}" target="_blank">Ver en YouTube</a>
-                `;
-                contenedor.appendChild(videoElement);
-                contadorShorts++;
-            }
-
-            if (!esShort && contadorLargos < 3) { // Mostrar solo 3 videos largos
-                const videoElement = document.createElement("div");
-                videoElement.classList.add("video-item");
-                videoElement.innerHTML = `
-                    <a href="${urlVideo}" target="_blank">
-                        <img src="${miniatura}" alt="${titulo}">
-                    </a>
-                    <p>${titulo}</p>
-                    <a href="${urlVideo}" target="_blank">Ver en YouTube</a>
-                `;
-                contenedor.appendChild(videoElement);
-                contadorLargos++;
+        let contador = 0;
+        items.forEach(video => {
+            const duracion = duraciones[video.id.videoId];
+            if (duracion !== undefined && duracion < 60 && contador < 6) {
+                crearElementoVideo(video, contenedorShorts);
+                contador++;
             }
         });
     } catch (error) {
-        console.error("Error obteniendo videos recientes:", error);
+        console.error("Error obteniendo los Shorts:", error);
     }
 }
 
+// Obtener y mostrar videos largos (videoDuration=medium + long)
+async function obtenerVideosLargos() {
+    const contenedorLargos = document.getElementById("recent-videos");
+    contenedorLargos.innerHTML = "";
+
+    try {
+        // Combina videos medianos y largos para incluir todos los que no son Shorts
+        const [medios, largos] = await Promise.all([
+            obtenerVideosPorTipo("medium", 3),
+            obtenerVideosPorTipo("long", 3)
+        ]);
+
+        // Mezcla y ordena por fecha de publicación (más recientes primero)
+        const todos = [...medios, ...largos].sort((a, b) =>
+            new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
+        );
+
+        const ids = todos.map(v => v.id.videoId);
+        const duraciones = await obtenerDuraciones(ids);
+
+        let contador = 0;
+        todos.forEach(video => {
+            const duracion = duraciones[video.id.videoId];
+            // Excluye shorts por si acaso (>= 60 segundos)
+            if (duracion !== undefined && duracion >= 60 && contador < 6) {
+                crearElementoVideo(video, contenedorLargos);
+                contador++;
+            }
+        });
+
+        // Si no hay videos largos, muestra un mensaje informativo
+        if (contador === 0) {
+            contenedorLargos.innerHTML = "<p class='sin-videos'>Aún no hay videos largos</p>";
+        }
+    } catch (error) {
+        console.error("Error obteniendo los videos largos:", error);
+    }
+}
 
 function actualizarEnTiempoReal() {
     obtenerSuscriptores();
-    obtenerVideosRecientes();
+    obtenerShorts();
+    obtenerVideosLargos();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
