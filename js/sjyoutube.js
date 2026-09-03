@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyREDACTED";
+const API_KEY = "AIzaSyBgLep6dKOxdE7FX-GRvcBK2ku49MQq9HQ";
 const CHANNEL_ID = "UCBvP4UeN3p7a6OevNVdZ3AQ";
 
 // Menú hamburguesa
