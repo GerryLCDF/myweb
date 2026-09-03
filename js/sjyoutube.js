@@ -119,4 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarEnTiempoReal();
     setInterval(actualizarEnTiempoReal, 1200000); // 20 minutos
 
+    // Aplicar el efecto fade-in a los elementos con esa clase
+    const fadeEls = document.querySelectorAll('.fade-in');
+    fadeEls.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.add('visible');
+        }, 200 * index);
+    });
 });
