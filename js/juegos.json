@@ -1,0 +1,87 @@
+[
+  {
+    "titulo": "Blasphemous",
+    "url": "https://rawg.io/games/blasphemous",
+    "imagen": "https://media.rawg.io/media/games/b01/b01aa6b2d6d4f683203e9471a8b8d5b5.jpg"
+  },
+  {
+    "titulo": "Blasphemous 2",
+    "url": "https://rawg.io/games/blasphemous-2",
+    "imagen": "https://media.rawg.io/media/games/73b/73bcfec00beec38a3d3527db4f9b8c53.jpg"
+  },
+  {
+    "titulo": "Celeste",
+    "url": "https://rawg.io/games/celeste",
+    "imagen": "https://media.rawg.io/media/games/594/59487800889ebac294c7c2c070d02356.jpg"
+  },
+  {
+    "titulo": "Cult of the Lamb",
+    "url": "https://rawg.io/games/cult-of-the-lamb",
+    "imagen": "https://media.rawg.io/media/games/ab8/ab8217a1fe2ced388a388722734e6d16.jpg"
+  },
+  {
+    "titulo": "Cuphead",
+    "url": "https://rawg.io/games/cuphead",
+    "imagen": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg"
+  },
+  {
+    "titulo": "Fallout: New Vegas",
+    "url": "https://rawg.io/games/fallout-new-vegas",
+    "imagen": "https://media.rawg.io/media/games/995/9951d9d55323d08967640f7b9ab3e342.jpg"
+  },
+  {
+    "titulo": "Hollow Knight",
+    "url": "https://rawg.io/games/hollow-knight",
+    "imagen": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg"
+  },
+  {
+    "titulo": "Super Mario World",
+    "url": "https://rawg.io/games/super-mario-world",
+    "imagen": "https://media.rawg.io/media/games/3bb/3bb2c8d774c3a83eb2c17d0d3d51f020.jpg"
+  },
+  {
+    "titulo": "Metal Slug",
+    "url": "https://rawg.io/games/metal-slug",
+    "imagen": "https://media.rawg.io/media/screenshots/3c3/3c39531ddeb8cf8c12ab3f0b6ec968d3.jpeg"
+  },
+  {
+    "titulo": "Party Animals",
+    "url": "https://rawg.io/games/party-animals-2",
+    "imagen": "https://media.rawg.io/media/games/b66/b6601abafd9fa58ff7453808ca3581c2.jpg"
+  },
+  {
+    "titulo": "Red Dead Redemption 2",
+    "url": "https://rawg.io/games/red-dead-redemption-2",
+    "imagen": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg"
+  },
+  {
+    "titulo": "Mario 64",
+    "url": "https://rawg.io/games/mario-64",
+    "imagen": "https://media.rawg.io/media/screenshots/dc6/dc693efed14b5c59dc02f34408aa123c.jpg"
+  },
+  {
+    "titulo": "Tails of Iron",
+    "url": "https://rawg.io/games/tails-of-iron",
+    "imagen": "https://media.rawg.io/media/games/27e/27e46821c94d9f3853bb30fb1157b0ab.jpg"
+  },
+  {
+    "titulo": "Tunic",
+    "url": "https://rawg.io/games/tunic",
+    "imagen": "https://media.rawg.io/media/games/2c1/2c1984e128ac48b89953ed4de4904a3b.jpg"
+  },
+  {
+    "titulo": "VVVVVV",
+    "url": "https://rawg.io/games/vvvvvv",
+    "imagen": "https://media.rawg.io/media/screenshots/6fe/6fe228662a253cd929cc78a103541ee0.jpg"
+  },
+  {
+    "titulo": "The Binding of Isaac",
+    "url": "https://rawg.io/games/the-binding-of-isaac",
+    "imagen": "https://media.rawg.io/media/games/cef/cefedf18016cbab466861eb698daf988.jpg"
+  },
+  {
+    "titulo": "The Legend of Zelda",
+    "url": "https://rawg.io/games/the-legend-of-zelda",
+    "imagen": "https://media.rawg.io/media/games/f87/f87de0e93f02007fd044e4bf04d453d8.jpg"
+  }
+]

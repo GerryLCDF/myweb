@@ -34,25 +34,6 @@ document.addEventListener("click", (e) => {
 *********************************************/
 document.addEventListener("DOMContentLoaded", function () {
 
-    function createCarouselItems(track, items) {
-        items.forEach(item => {
-            const div = document.createElement("div");
-            div.classList.add("carousel-item");
-
-            const img = document.createElement("img");
-            img.src = item.src;
-            img.alt = item.title;
-
-            const title = document.createElement("div");
-            title.classList.add("carousel-title");
-            title.textContent = item.title;
-
-            div.appendChild(img);
-            div.appendChild(title);
-            track.appendChild(div);
-        });
-    }
-
     function InfiniteCarousel(trackId, prevBtnId, nextBtnId) {
         const track = document.getElementById(trackId);
         const prevBtn = document.getElementById(prevBtnId);
@@ -105,79 +86,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Referencias a los tracks
-    const booksTrack = document.getElementById("books-track");
-    const gamesTrack = document.getElementById("games-track");
-
-    // Listas de elementos para cada carrusel
-    const libros = [
-        { src: "img/libros/Berserk.jpg", title: "Berserk" },
-        { src: "img/libros/Godot Engine Game Development Projects.jpg", title: "Godot Engine Game Development Projects" },
-        { src: "img/libros/H.P LOVECRAFT.jpg", title: "H.P. Lovecraft" },
-        { src: "img/libros/How To Draw Ghibli Studio Characters.jpg", title: "How To Draw Ghibli Studio Characters" },
-        { src: "img/libros/Komi Can’t Communicate, All.jpg", title: "Komi Can't Communicate (All Volumes)" },
-        { src: "img/libros/La Divina Comedia.jpg", title: "La Divina Comedia" },
-        { src: "img/libros/La nada nadea.jpg", title: "La Nada Nadae" },
-        { src: "img/libros/La Poetica De Aristoteles.jpg", title: "La Poética de Aristóteles" },
-        { src: "img/libros/Learning Python.jpg", title: "Learning Python" },
-        { src: "img/libros/Matar a Platón.jpg", title: "Matar a Platón" },
-        { src: "img/libros/Matemática Esencial para Game Devs.jpg", title: "Matemática Esencial para Game Devs" },
-        { src: "img/libros/Ranma ½.jpg", title: "Ranma ½ (All Volumes)" },
-        { src: "img/libros/Tecnicas de animacion.jpg", title: "Técnicas de Animación" },
-        { src: "img/libros/Test Drive Blender.jpg", title: "Test Drive Blender" },
-        { src: "img/libros/The Game Dev Roadmap.jpg", title: "The Game Dev Roadmap" },
-        { src: "img/libros/Unity3D.jpg", title: "Unity3D" },
-        { src: "img/libros/zelda-majora.jpg", title: "Zelda: Majora’s Mask" }
-    ];
-    
-
-    const games = [
-        { src: "img/games/BLASPHEMOUS.png", title: "BLASPHEMOUS" },
-        { src: "img/games/BLASPHEMOUS2.png", title: "BLASPHEMOUS 2" },
-        { src: "img/games/CELESTE.png", title: "CELESTE" },
-        { src: "img/games/CULT OF THE LAMB.png", title: "CULT OF THE LAMB." },
-        { src: "img/games/CUPHEAD.png", title: "CUPHEAD" },
-        { src: "img/games/FALLOUT NV.png", title: "fallout NV" },
-        { src: "img/games/HOLLOW KNIGHT.png", title: "HOLLOW KNIGHT" },
-        { src: "img/games/marioWorld.jpg", title: "Mario world" },
-        { src: "img/games/METAL SLUG.png", title: "METAL SLUG" },
-        { src: "img/games/PARTY ANIMALS.png", title: "PARTY ANIMALS" },
-        { src: "img/games/RED DEAD REdemption2.png", title: "Res Dead Redemption 2" },
-        { src: "img/games/super64.webp", title: "mario 64" },
-        { src: "img/games/TAILS OF IRON.png", title: "TAILS OF IRON" },
-        { src: "img/games/TUNIC.png", title: "TUNIC" },
-        { src: "img/games/VVVVVV.png", title: "VVVVVV" },
-        { src: "img/games/issac.png", title: "The binding of issac" },
-        { src: "img/games/zelda.webp", title: "The leguen of zelda " }
-    ];
-
-    // Generar los carruseles con las listas
-    createCarouselItems(booksTrack, libros);
-    createCarouselItems(gamesTrack, games);
-
-    // Inicializar los carruseles
-    new InfiniteCarousel("books-track", "prevBookBtn", "nextBookBtn");
-    new InfiniteCarousel("games-track", "prevGameBtn", "nextGameBtn");
-
-    // Carrusel de películas desde TMDb (js/gustos.json)
-    const peliculasTrack = document.getElementById("tmdb-track");
-    if (peliculasTrack) {
-        fetch("/js/gustos.json", { cache: "no-store" })
+    // Cargar un carrusel desde un archivo JSON del mismo dominio
+    function cargarCarruselDesdeJSON(trackId, jsonUrl, prevBtnId, nextBtnId, mensajeVacio) {
+        const track = document.getElementById(trackId);
+        if (!track) return;
+        fetch(jsonUrl, { cache: "no-store" })
             .then(r => r.json())
-            .then(peliculas => {
-                if (!peliculas || peliculas.length === 0) {
-                    peliculasTrack.innerHTML =
-                        "<p class='sin-videos'>Aún no hay películas en mi lista WebMovie</p>";
+            .then(items => {
+                if (!items || items.length === 0) {
+                    track.innerHTML = `<p class='sin-videos'>${mensajeVacio}</p>`;
                     return;
                 }
-                const items = peliculas.filter(p => p.imagen);
-                items.forEach(p => {
+                items.filter(p => p.imagen).forEach(p => {
                     const div = document.createElement("div");
                     div.classList.add("carousel-item", "tmdb-item");
                     const a = document.createElement("a");
-                    a.href = p.url;
-                    a.target = "_blank";
-                    a.rel = "noopener";
+                    if (p.url) { a.href = p.url; a.target = "_blank"; a.rel = "noopener"; }
                     const img = document.createElement("img");
                     img.src = p.imagen;
                     img.alt = p.titulo;
@@ -187,15 +111,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     a.appendChild(img);
                     a.appendChild(title);
                     div.appendChild(a);
-                    peliculasTrack.appendChild(div);
+                    track.appendChild(div);
                 });
-                new InfiniteCarousel("tmdb-track", "prevPeliculaBtn", "nextPeliculaBtn");
+                new InfiniteCarousel(trackId, prevBtnId, nextBtnId);
             })
             .catch(err => {
-                console.error("Error cargando TMDb:", err);
-                peliculasTrack.innerHTML = "<p class='sin-videos'>No se pudo cargar TMDb</p>";
+                console.error("Error cargando carrusel " + trackId + ":", err);
+                track.innerHTML = "<p class='sin-videos'>No se pudo cargar</p>";
             });
     }
+
+    // Libros desde Open Library
+    cargarCarruselDesdeJSON("books-track", "/js/libros.json", "prevBookBtn", "nextBookBtn", "Aún no hay libros en mi lista");
+    // Juegos desde RAWG
+    cargarCarruselDesdeJSON("games-track", "/js/juegos.json", "prevGameBtn", "nextGameBtn", "Aún no hay juegos en mi lista");
+    // Películas desde TMDb
+    cargarCarruselDesdeJSON("tmdb-track", "/js/gustos.json", "prevPeliculaBtn", "nextPeliculaBtn", "Aún no hay películas en mi lista WebMovie");
 });
 
 
