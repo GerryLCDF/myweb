@@ -51,15 +51,15 @@
   color: #0bf;
 }
 
-/* Carrusel de Shorts */
-.shorts-carousel-container {
+/* Carrusel de videos (Shorts y videos largos) */
+.youtube-carousel-container {
   overflow-x: auto;
   width: 100%;
   max-width: 100%;
   padding: 10px 0;
 }
 
-.shorts-carousel {
+.youtube-carousel {
   display: flex;
   gap: 15px;
   overflow-x: auto;
@@ -68,7 +68,7 @@
   padding: 10px;
 }
 
-.shorts-carousel .video-item {
+.youtube-carousel .video-item {
   flex: 0 0 auto;
   width: 150px;
   scroll-snap-align: center;
@@ -79,8 +79,46 @@
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
-.shorts-carousel img {
+.youtube-carousel img {
   width: 100%;
   height: auto;
   border-radius: 6px;
+}
+
+.youtube-carousel p {
+  margin-top: 8px;
+  font-size: 0.85em;
+  color: #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Rectángulo "Ver más en YouTube" al final del carrusel */
+.youtube-carousel .ver-mas {
+  flex: 0 0 auto;
+  width: 150px;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c4302b;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  height: 180px;
+}
+
+.youtube-carousel .ver-mas:hover {
+  transform: scale(1.03);
+  background-color: #a42823;
+}
+
+.youtube-carousel .ver-mas a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
 }

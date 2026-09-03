@@ -60,9 +60,20 @@ function crearElementoVideo(video, contenedor) {
             <img src="${miniatura}" alt="${titulo}">
         </a>
         <p>${titulo}</p>
-        <a href="${urlVideo}" target="_blank">Ver en YouTube</a>
     `;
     contenedor.appendChild(videoElement);
+}
+
+// Añadir el rectángulo "Ver más en YouTube" al final de un carrusel
+function agregarVerMas(contenedor, canalId) {
+    const verMas = document.createElement("div");
+    verMas.classList.add("ver-mas");
+    verMas.innerHTML = `
+        <a href="https://www.youtube.com/channel/${canalId}/videos" target="_blank">
+            Ver más<br>en YouTube
+        </a>
+    `;
+    contenedor.appendChild(verMas);
 }
 
 // Obtener una sola lista de videos recientes del canal, ordenada por fecha
@@ -84,7 +95,7 @@ async function obtenerVideosClasificados() {
         const duracion = duraciones[video.id.videoId];
         if (duracion === undefined) return;
         const item = { video, duracion };
-        if (duracion < 60) {
+        if (duracion < 120) {   // Short: menos de 2 minutos
             shorts.push(item);
         } else {
             largos.push(item);
@@ -102,6 +113,7 @@ async function obtenerShorts() {
         const { shorts } = await obtenerVideosClasificados();
         const ultimos = shorts.slice(0, 4); // últimos 4
         ultimos.forEach(item => crearElementoVideo(item.video, contenedorShorts));
+        agregarVerMas(contenedorShorts, CHANNEL_ID);
     } catch (error) {
         console.error("Error obteniendo los Shorts:", error);
     }
@@ -118,8 +130,12 @@ async function obtenerVideosLargos() {
         ultimos.forEach(item => crearElementoVideo(item.video, contenedorLargos));
 
         if (ultimos.length === 0) {
-            contenedorLargos.innerHTML = "<p class='sin-videos'>Aún no hay videos largos</p>";
+            contenedorLargos.insertAdjacentHTML(
+                "beforeend",
+                "<p class='sin-videos'>Aún no hay videos largos</p>"
+            );
         }
+        agregarVerMas(contenedorLargos, CHANNEL_ID);
     } catch (error) {
         console.error("Error obteniendo los videos largos:", error);
     }
