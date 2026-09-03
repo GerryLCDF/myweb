@@ -1,114 +1,4 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #222; 
-  color: #fff;
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  transition: filter 0.3s ease;
-}
-
-/* MENÚ HAMBURGUESA */
-.menu-bar {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 101;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.menu-bar .bar {
-  width: 30px;
-  height: 4px;
-  background-color: white;
-  margin: 6px 0;
-  transition: 0.3s;
-}
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background-color: #111;
-  transition: left 0.3s ease;
-  padding-top: 70px; /* 🔹 Espaciado superior corregido */
-  z-index: 100;
-  text-align: left;
-  padding-left: 20px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 15px;
-  text-align: left;
-}
-
-.sidebar ul li a {
-  color: #bbb;
-  text-decoration: none;
-  font-size: 1.2em;
-  display: block;
-  transition: color 0.3s ease;
-}
-
-.sidebar ul li a:hover {
-  color: #fff;
-}
-
-/* Activa la barra lateral */
-.sidebar.active {
-  left: 0;
-}
-
-/* Overlay efecto borroso */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  z-index: 98;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  pointer-events: none;
-}
-
-.overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* Logo del canal */
-#channel-image {
-  width: 80px;  /* 🔹 Ajusta el tamaño del logo */
-  height: 80px;
-  border-radius: 50%;
-  display: block;
-  margin: 10px auto; /* 🔹 Centra el logo */
-  object-fit: cover; /* 🔹 Asegura que no se deforme */
-  transition: transform 0.3s ease;
-}
-
-#channel-image:hover {
-  transform: scale(1.1); /* 🔹 Efecto de zoom al pasar el mouse */
-}
-
+/* ===== Estilos únicos de la página YouTube (complementan a common.css) ===== */
 
 /* Contenedor principal */
 .youtube-container {
@@ -129,9 +19,9 @@ body {
 .channel-info {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 🔹 Centra todo horizontalmente */
+  align-items: center;
   justify-content: center;
-  gap: 10px; /* 🔹 Espacio entre elementos */
+  gap: 10px;
 }
 
 /* Logo del canal */
@@ -140,9 +30,9 @@ body {
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  transition: transform 0.3s ease;
   display: block;
-  margin: 10px auto; /* 🔹 Centrado */
+  margin: 10px auto;
+  transition: transform 0.3s ease;
 }
 
 #channel-image:hover {
@@ -161,26 +51,7 @@ body {
   color: #0bf;
 }
 
-/* Ajuste del menú hamburguesa */
-.menu-bar {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 101;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.menu-bar .bar {
-  width: 30px;
-  height: 4px;
-  background-color: white;
-  margin: 6px 0;
-  transition: 0.3s;
-}
-
+/* Carrusel de Shorts */
 .shorts-carousel-container {
   overflow-x: auto;
   width: 100%;

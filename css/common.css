@@ -1,0 +1,141 @@
+/* ===== CSS COMPARTIDO =====
+   Estilos base, menú hamburguesa, sidebar, overlay y fade-in.
+   Se carga en varias páginas antes del CSS de cada una. */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base del cuerpo */
+body {
+  background-color: #111;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  color: #fff;
+  transition: filter 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Títulos con Playfair Display */
+h1, h2 {
+  font-family: "Playfair Display", serif;
+}
+
+/* ===== MENÚ HAMBURGUESA ===== */
+.menu-bar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.menu-bar .bar {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 99;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px;
+}
+
+.sidebar ul li a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 1.2em;
+  display: block;
+  transition: color 0.3s;
+}
+
+.sidebar ul li:hover {
+  background: #333;
+}
+
+.sidebar ul li a:hover {
+  color: #fff;
+}
+
+/* Clase para mostrar la barra (según el JS de cada página) */
+.sidebar.active,
+.sidebar.open {
+  left: 0;
+}
+
+/* ===== OVERLAY (fondo borroso) ===== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 98;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===== DESENFOQUE DEL CONTENIDO ===== */
+.blurred {
+  filter: blur(5px);
+}
+
+/* ===== EFFECTOS FADE-IN ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade-in de la página completa (body) */
+body.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
