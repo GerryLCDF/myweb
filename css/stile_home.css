@@ -116,11 +116,13 @@ p {
 .social-icons svg {
   width: 30px;
   height: 30px;
-  transition: transform 0.2s;
+  transition: transform 0.2s, fill 0.3s, stroke 0.3s;
 }
 
 .social-icons svg:hover {
   transform: scale(1.1);
+  fill: #26CFD2;
+  stroke: #26CFD2;
 }
 
 /* Lista de enlaces */
