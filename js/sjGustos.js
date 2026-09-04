@@ -36,54 +36,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function InfiniteCarousel(trackId, prevBtnId, nextBtnId) {
         const track = document.getElementById(trackId);
+        const container = track.closest(".carousel-container");
         const prevBtn = document.getElementById(prevBtnId);
         const nextBtn = document.getElementById(nextBtnId);
         let currentIndex = 0;
 
-        // Duplicar elementos para efecto infinito
-        const items = Array.from(track.children);
-        items.forEach(item => {
-            const clone = item.cloneNode(true);
-            track.appendChild(clone);
-        });
+        // Duplicar los elementos para el efecto infinito (2 copias del set)
+        const originals = Array.from(track.children);
+        originals.forEach(item => track.appendChild(item.cloneNode(true)));
+        const totalOriginals = originals.length;
 
-        function updateSlidePosition() {
-            const widthSlide = track.children[0].offsetWidth;
-            track.style.transition = "transform 0.4s ease-in-out";
-            track.style.transform = `translateX(${-widthSlide * currentIndex}px)`;
+        // La tarjeta inicial (con su margen) da el paso de desplazamiento
+        function itemStep() {
+            const first = track.children[0];
+            if (!first) return 160;
+            const style = getComputedStyle(first);
+            const ml = parseFloat(style.marginLeft) || 0;
+            const mr = parseFloat(style.marginRight) || 0;
+            return first.offsetWidth + ml + mr;
+        }
+
+        // Cuántas tarjetas avanzar por clic (las visibles en pantalla)
+        function pasoPorClic() {
+            const visible = container ? container.clientWidth : 800;
+            const step = itemStep();
+            return Math.max(1, Math.round(visible / step));
+        }
+
+        function update(animate) {
+            const step = itemStep();
+            track.style.transition = animate
+                ? "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
+                : "none";
+            track.style.transform = `translateX(${-step * currentIndex}px)`;
         }
 
         nextBtn.addEventListener("click", () => {
-            if (currentIndex >= track.children.length / 2) {
-                track.style.transition = "none";
-                currentIndex = 0;
-                updateSlidePosition();
+            const p = pasoPorClic();
+            currentIndex += p;
+            update(true);
+            // Si nos pasamos de la primera copia, volver al inicio sin animación
+            if (currentIndex >= totalOriginals + p) {
                 setTimeout(() => {
-                    track.style.transition = "transform 0.4s ease-in-out";
-                    currentIndex++;
-                    updateSlidePosition();
-                }, 50);
-            } else {
-                currentIndex++;
-                updateSlidePosition();
+                    currentIndex = 0;
+                    update(false);
+                }, 500);
             }
         });
 
         prevBtn.addEventListener("click", () => {
-            if (currentIndex <= 0) {
-                track.style.transition = "none";
-                currentIndex = track.children.length / 2;
-                updateSlidePosition();
+            const p = pasoPorClic();
+            currentIndex -= p;
+            update(true);
+            if (currentIndex < 0) {
+                // Saltar al final de la copia para seguir hacia atrás
                 setTimeout(() => {
-                    track.style.transition = "transform 0.4s ease-in-out";
-                    currentIndex--;
-                    updateSlidePosition();
-                }, 50);
-            } else {
-                currentIndex--;
-                updateSlidePosition();
+                    currentIndex = totalOriginals;
+                    update(false);
+                }, 500);
             }
         });
+
+        // Adaptarse al cambiar el tamaño de la ventana
+        window.addEventListener("resize", () => update(false));
     }
 
     // Cargar un carrusel desde un archivo JSON del mismo dominio
@@ -129,40 +144,17 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarCarruselDesdeJSON("tmdb-track", "/js/gustos.json", "prevPeliculaBtn", "nextPeliculaBtn", "Aún no hay películas en mi lista WebMovie");
 });
 
-
-
-    
-        /*********************************************
-           EFECTO FADE-IN (aparición secuencial)
-        *********************************************/
-           function initFadeInEffects() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach((el, index) => {
-                const delay = 300 * index;
-                setTimeout(() => {
-                    el.classList.add('visible');
-                }, delay);
-            });
-        }
-    
-        // Iniciar efectos de aparición
-        initFadeInEffects();
- 
-
-  /*******************************************
-   Efecto fade-in al cargar la página
-*******************************************/
-document.addEventListener("DOMContentLoaded", () => {
-  // Selecciona todos los .fade-in
-  const fadeEls = document.querySelectorAll('.fade-in');
-
-  fadeEls.forEach((el, index) => {
-    // Retraso de 200ms * index, ajusta si quieres
-    const delay = 200 * index;
-    setTimeout(() => {
-      el.classList.add('visible');
-    }, delay);
-  });
+/*********************************************
+   EFECTO FADE-IN (aparición secuencial)
+*********************************************/
+document.addEventListener("DOMContentLoaded", function () {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach((el, index) => {
+        const delay = 300 * index;
+        setTimeout(() => {
+            el.classList.add('visible');
+        }, delay);
+    });
 });
 
 

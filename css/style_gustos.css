@@ -47,50 +47,94 @@
   max-width: 800px;
   margin: 0 auto;
   overflow: hidden;
-  border: 2px solid #fff;
-  border-radius: 4px;
+  /* Sin borde duro */
+  padding: 24px 8px;
+}
+
+/* Degradados de fondo para desvanecer los bordes laterales */
+.carousel-container::before,
+.carousel-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 5;
+  pointer-events: none;
+}
+.carousel-container::before {
+  left: 0;
+  background: linear-gradient(to right, #222, transparent);
+}
+.carousel-container::after {
+  right: 0;
+  background: linear-gradient(to left, #222, transparent);
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.4s ease-in-out;
+  align-items: center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 10px 0;
 }
 
 .carousel-item {
   position: relative;
-  width: 150px;
-  height: 220px;
-  margin: 10px;
+  width: 160px;
+  height: 240px;
+  margin: 0 12px;
   flex-shrink: 0;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+  background: #2c2c2c;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  display: block;
+  transition: transform 0.45s ease;
 }
 
-/* Recuadro de título */
+/* Efecto al pasar el ratón: la tarjeta se eleva y agranda */
+.carousel-item:hover {
+  transform: scale(1.07) translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+  z-index: 20;
+}
+
+.carousel-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Recuadro de título: siempre visible con degradado */
 .carousel-title {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+  padding: 32px 10px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 55%, transparent 100%);
+  color: #fff;
   text-align: center;
-  padding: 8px 0;
-  font-size: 14px;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  /* Limita el título a 3 líneas con puntos suspensivos */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: background 0.3s ease;
 }
 
 .carousel-item:hover .carousel-title {
-  opacity: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.97) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
 }
 
 /* Botones flecha */
@@ -98,32 +142,37 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(4px);
   color: #fff;
-  border: none;
-  font-size: 2em;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 1.4em;
   cursor: pointer;
-  z-index: 10;
-  width: 40px;
-  height: 40px;
+  z-index: 15;
+  width: 44px;
+  height: 44px;
   text-align: center;
   border-radius: 50%;
-  line-height: 40px;
+  line-height: 42px;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 .prev-btn {
-  left: 10px;
+  left: 12px;
 }
 
 .next-btn {
-  right: 10px;
+  right: 12px;
 }
 
 .carousel-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  transform: translateY(-50%) scale(1.1);
 }
 
-/* Carrusel de películas (TMDb) */
+/* Carrusel de películas (TMDb) — el enlace ocupa toda la tarjeta */
 .tmdb-item a {
   display: block;
   width: 100%;
@@ -134,17 +183,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
 }
 
-/* Mensaje cuando no hay películas */
+/* Mensaje cuando no hay elementos */
 .sin-videos {
   color: #aaa;
   font-size: 1em;
   padding: 30px;
   text-align: center;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 12px;
+  width: 100%;
 }
 
 /* RESPONSIVIDAD */
@@ -158,7 +207,20 @@
   }
 
   .carousel-item {
-    width: 90px;
-    height: 130px;
+    width: 110px;
+    height: 165px;
+    margin: 0 8px;
+  }
+
+  .carousel-title {
+    font-size: 11.5px;
+    padding: 24px 6px 8px;
+  }
+
+  .carousel-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1em;
+    line-height: 36px;
   }
 }
