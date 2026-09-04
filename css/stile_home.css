@@ -121,7 +121,13 @@ p {
 
 .social-icons svg:hover {
   transform: scale(1.1);
+}
+
+.social-icons svg[fill="#fff"]:hover {
   fill: #26CFD2;
+}
+
+.social-icons svg[stroke="#fff"]:hover {
   stroke: #26CFD2;
 }
 
