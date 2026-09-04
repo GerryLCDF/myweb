@@ -1,5 +1,75 @@
 [
   {
+    "titulo": "The Binding of Isaac",
+    "url": "https://rawg.io/games/the-binding-of-isaac",
+    "imagen": "https://media.rawg.io/media/games/cef/cefedf18016cbab466861eb698daf988.jpg"
+  },
+  {
+    "titulo": "Tails of Iron",
+    "url": "https://rawg.io/games/tails-of-iron",
+    "imagen": "https://media.rawg.io/media/games/27e/27e46821c94d9f3853bb30fb1157b0ab.jpg"
+  },
+  {
+    "titulo": "METAL SLUG",
+    "url": "https://rawg.io/games/metal-slug",
+    "imagen": "https://media.rawg.io/media/screenshots/3c3/3c39531ddeb8cf8c12ab3f0b6ec968d3.jpeg"
+  },
+  {
+    "titulo": "Plants vs. Zombies",
+    "url": "https://rawg.io/games/plants-vs-zombies",
+    "imagen": "https://media.rawg.io/media/screenshots/590/590aa45fbab8d43b57f93dd60027af7f.jpg"
+  },
+  {
+    "titulo": "VVVVVV",
+    "url": "https://rawg.io/games/vvvvvv",
+    "imagen": "https://media.rawg.io/media/screenshots/6fe/6fe228662a253cd929cc78a103541ee0.jpg"
+  },
+  {
+    "titulo": "God of War (2018)",
+    "url": "https://rawg.io/games/god-of-war-2",
+    "imagen": "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg"
+  },
+  {
+    "titulo": "Fallout: New Vegas",
+    "url": "https://rawg.io/games/fallout-new-vegas",
+    "imagen": "https://media.rawg.io/media/games/995/9951d9d55323d08967640f7b9ab3e342.jpg"
+  },
+  {
+    "titulo": "Cuphead",
+    "url": "https://rawg.io/games/cuphead",
+    "imagen": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg"
+  },
+  {
+    "titulo": "Blasphemous II",
+    "url": "https://rawg.io/games/blasphemous-2",
+    "imagen": "https://media.rawg.io/media/games/73b/73bcfec00beec38a3d3527db4f9b8c53.jpg"
+  },
+  {
+    "titulo": "Alice: Madness Returns",
+    "url": "https://rawg.io/games/alice-madness-returns",
+    "imagen": "https://media.rawg.io/media/games/0b5/0b5410b1e4b3fb72696dcefbf4f1cf40.jpg"
+  },
+  {
+    "titulo": "The Legend of Zelda: Ocarina of Time",
+    "url": "https://rawg.io/games/the-legend-of-zelda-ocarina-of-time",
+    "imagen": "https://media.rawg.io/media/games/3a0/3a0c8e9ed3a711c542218831b893a0fa.jpg"
+  },
+  {
+    "titulo": "The Legend of Zelda: Majora's Mask",
+    "url": "https://rawg.io/games/the-legend-of-zelda-majoras-mask",
+    "imagen": "https://media.rawg.io/media/games/b3c/b3c209cd49aae8a469a59b79b54dc599.jpg"
+  },
+  {
+    "titulo": "Super Mario World",
+    "url": "https://rawg.io/games/super-mario-world",
+    "imagen": "https://media.rawg.io/media/games/3bb/3bb2c8d774c3a83eb2c17d0d3d51f020.jpg"
+  },
+  {
+    "titulo": "Red Dead Redemption 2",
+    "url": "https://rawg.io/games/red-dead-redemption-2",
+    "imagen": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg"
+  },
+  {
     "titulo": "Cult of the Lamb",
     "url": "https://rawg.io/games/cult-of-the-lamb",
     "imagen": "https://media.rawg.io/media/games/ab8/ab8217a1fe2ced388a388722734e6d16.jpg"
