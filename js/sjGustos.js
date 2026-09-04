@@ -40,25 +40,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const prevBtn = document.getElementById(prevBtnId);
         const nextBtn = document.getElementById(nextBtnId);
 
-        const originals = Array.from(track.children);
-        const totalOriginals = originals.length;
-        if (totalOriginals === 0) return;
+        const items = Array.from(track.children);
+        const total = items.length;
+        if (total === 0) return;
 
-        // Triplicar el set para tener contenido de sobra en ambos extremos.
-        // Al empezar en la segunda copia, siempre hay tarjetas antes y después.
-        for (let i = 0; i < 2; i++) {
-            originals.forEach(item => track.appendChild(item.cloneNode(true)));
+        // Nº de tarjetas que entran en el viewport (y cuántas se mueven por clic)
+        function pasoPorClic() {
+            const visible = container ? container.clientWidth : 800;
+            const step = itemStep();
+            return Math.max(1, Math.min(total, Math.round(visible / step)));
         }
 
-        // currentIndex = índice visual dentro del track (0..totalOriginals*3).
-        // Arranca en totalOriginals (inicio de la 2ª copia) para permitir
-        // retroceder sin ver el "vacío" del principio.
-        let currentIndex = totalOriginals;
-
-        // Límite superior = final de la 2ª copia (aún hay 3ª copia de sobra)
-        const maxIndex = totalOriginals * 2;
-
-        // Paso de desplazamiento en píxeles (tarjeta + márgenes)
+        // Paso en píxeles (tarjeta + márgenes)
         function itemStep() {
             const first = track.children[0];
             if (!first) return 160;
@@ -68,48 +61,62 @@ document.addEventListener("DOMContentLoaded", function () {
             return first.offsetWidth + ml + mr;
         }
 
-        // Cuántas tarjetas avanzar por clic (las visibles en pantalla)
-        function pasoPorClic() {
-            const visible = container ? container.clientWidth : 800;
-            const step = itemStep();
-            return Math.max(1, Math.round(visible / step));
-        }
-
-        function update(animate) {
-            const step = itemStep();
-            track.style.transition = animate
+        function setTransition(on) {
+            track.style.transition = on
                 ? "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)"
                 : "none";
-            track.style.transform = `translateX(${-step * currentIndex}px)`;
         }
 
-        // Posicionarse al inicio sin animación (se muestra la 2ª copia)
-        update(false);
+        function setPos(px) {
+            track.style.transform = `translateX(${px}px)`;
+        }
 
+        // ---------- SIGUIENTE ----------
+        // Desliza a la izquierda y, al terminar, recicla los primeros items al final
         nextBtn.addEventListener("click", () => {
-            currentIndex += pasoPorClic();
-            // Si pasamos del límite, envolvemos al mismo punto en la copia
-            // anterior: el contenido es idéntico, así que el salto es invisible.
-            if (currentIndex > maxIndex) {
-                currentIndex -= totalOriginals;
-                update(false);
-            } else {
-                update(true);
-            }
+            if (track.dataset.busy === "1") return;
+            track.dataset.busy = "1";
+            const n = pasoPorClic();
+
+            setTransition(true);
+            setPos(-n * itemStep());
+
+            const done = () => {
+                const moved = Array.from(track.children).slice(0, n);
+                moved.forEach(item => track.appendChild(item));
+                setTransition(false);
+                setPos(0);
+                track.removeEventListener("transitionend", done);
+                track.dataset.busy = "0";
+            };
+            track.addEventListener("transitionend", done, { once: true });
         });
 
+        // ---------- ANTERIOR ----------
+        // Recicla los últimos items al principio y desliza de vuelta a la derecha
         prevBtn.addEventListener("click", () => {
-            currentIndex -= pasoPorClic();
-            if (currentIndex < totalOriginals) {
-                currentIndex += totalOriginals;
-                update(false);
-            } else {
-                update(true);
-            }
-        });
+            if (track.dataset.busy === "1") return;
+            track.dataset.busy = "1";
+            const n = pasoPorClic();
 
-        // Adaptarse al cambiar el tamaño de la ventana
-        window.addEventListener("resize", () => update(false));
+            // Mueve los últimos n items al inicio (sin transición, se reaprovechan)
+            const moved = Array.from(track.children).slice(-n);
+            moved.forEach(item => track.insertBefore(item, track.firstChild));
+            setTransition(false);
+            setPos(-n * itemStep()); // posiciona como si viniera de la izquierda
+
+            // Fuerza el reflow para que el cambio de posición sea efectivo
+            void track.offsetWidth;
+
+            setTransition(true);
+            setPos(0);
+
+            const done = () => {
+                track.removeEventListener("transitionend", done);
+                track.dataset.busy = "0";
+            };
+            track.addEventListener("transitionend", done, { once: true });
+        });
     }
 
     // Cargar un carrusel desde un archivo JSON del mismo dominio
