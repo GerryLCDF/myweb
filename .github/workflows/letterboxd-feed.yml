@@ -49,30 +49,44 @@ jobs:
           print(f"Películas: {len(peliculas)}")
 
           # ---------- LIBROS (Open Library) ----------
+          # Mantener datos previos (portadas/enlaces) por si la búsqueda falla
+          prev_libros = {}
+          try:
+              prev_libros = {x.get("titulo"): x for x in json.load(open("js/libros.json"))}
+          except Exception:
+              prev_libros = {}
           libros = []
           try:
               with open("_data/titulos-libros.txt", encoding="utf-8") as f:
                   titulos = [l.strip() for l in f if l.strip()]
               for t in titulos:
                   q = urllib.parse.quote(t)
+                  entry = {"titulo": t}
                   try:
-                      url = f"https://openlibrary.org/search.json?q={q}&limit=1"
-                      with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "myweb-gustos/1.0"}), timeout=25) as r:
-                          data = json.load(r)
+                      for attempt in range(3):
+                          try:
+                              url = f"https://openlibrary.org/search.json?q={q}&limit=1"
+                              with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "myweb-gustos/1.0"}), timeout=25) as r:
+                                  data = json.load(r)
+                              break
+                          except Exception:
+                              if attempt == 2:
+                                  raise
+                              time.sleep(3)
                       doc = (data.get("docs") or [None])[0]
                       if doc:
                           cover = doc.get("cover_i")
                           work = doc.get("key") or ""
-                          img = None
-                          if cover:
-                              img = f"https://covers.openlibrary.org/b/id/{cover}-M.jpg"
-                          libros.append({
-                              "titulo": t,
-                              "url": f"https://openlibrary.org{work}" if work else "",
-                              "imagen": img
-                          })
+                          entry["url"] = f"https://openlibrary.org{work}" if work else ""
+                          entry["imagen"] = f"https://covers.openlibrary.org/b/id/{cover}-M.jpg" if cover else None
+                      else:
+                          raise Exception("sin resultados")
                   except Exception:
-                      libros.append({"titulo": t, "url": "", "imagen": None})
+                      # Vuelve a los datos previos si los había, si no queda null
+                      prev = prev_libros.get(t, {})
+                      entry["url"] = prev.get("url", "")
+                      entry["imagen"] = prev.get("imagen")
+                  libros.append(entry)
                   time.sleep(0.3)
           except Exception as e:
               print("Error procesando libros:", e)
