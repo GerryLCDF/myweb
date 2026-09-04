@@ -39,14 +39,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const container = track.closest(".carousel-container");
         const prevBtn = document.getElementById(prevBtnId);
         const nextBtn = document.getElementById(nextBtnId);
-        let currentIndex = 0;
 
-        // Duplicar los elementos para el efecto infinito (2 copias del set)
         const originals = Array.from(track.children);
-        originals.forEach(item => track.appendChild(item.cloneNode(true)));
         const totalOriginals = originals.length;
+        if (totalOriginals === 0) return;
 
-        // La tarjeta inicial (con su margen) da el paso de desplazamiento
+        // Triplicar el set para tener contenido de sobra en ambos extremos.
+        // Al empezar en la segunda copia, siempre hay tarjetas antes y después.
+        for (let i = 0; i < 2; i++) {
+            originals.forEach(item => track.appendChild(item.cloneNode(true)));
+        }
+
+        // currentIndex = índice visual dentro del track (0..totalOriginals*3).
+        // Arranca en totalOriginals (inicio de la 2ª copia) para permitir
+        // retroceder sin ver el "vacío" del principio.
+        let currentIndex = totalOriginals;
+
+        // Límite superior = final de la 2ª copia (aún hay 3ª copia de sobra)
+        const maxIndex = totalOriginals * 2;
+
+        // Paso de desplazamiento en píxeles (tarjeta + márgenes)
         function itemStep() {
             const first = track.children[0];
             if (!first) return 160;
@@ -71,29 +83,28 @@ document.addEventListener("DOMContentLoaded", function () {
             track.style.transform = `translateX(${-step * currentIndex}px)`;
         }
 
+        // Posicionarse al inicio sin animación (se muestra la 2ª copia)
+        update(false);
+
         nextBtn.addEventListener("click", () => {
-            const p = pasoPorClic();
-            currentIndex += p;
-            update(true);
-            // Si nos pasamos de la primera copia, volver al inicio sin animación
-            if (currentIndex >= totalOriginals + p) {
-                setTimeout(() => {
-                    currentIndex = 0;
-                    update(false);
-                }, 500);
+            currentIndex += pasoPorClic();
+            // Si pasamos del límite, envolvemos al mismo punto en la copia
+            // anterior: el contenido es idéntico, así que el salto es invisible.
+            if (currentIndex > maxIndex) {
+                currentIndex -= totalOriginals;
+                update(false);
+            } else {
+                update(true);
             }
         });
 
         prevBtn.addEventListener("click", () => {
-            const p = pasoPorClic();
-            currentIndex -= p;
-            update(true);
-            if (currentIndex < 0) {
-                // Saltar al final de la copia para seguir hacia atrás
-                setTimeout(() => {
-                    currentIndex = totalOriginals;
-                    update(false);
-                }, 500);
+            currentIndex -= pasoPorClic();
+            if (currentIndex < totalOriginals) {
+                currentIndex += totalOriginals;
+                update(false);
+            } else {
+                update(true);
             }
         });
 
