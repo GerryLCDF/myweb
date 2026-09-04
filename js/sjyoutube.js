@@ -1,13 +1,7 @@
 const API_KEY = "AIzaSyBgLep6dKOxdE7FX-GRvcBK2ku49MQq9HQ";
 const CHANNEL_ID = "UCBvP4UeN3p7a6OevNVdZ3AQ";
 
-// Menú hamburguesa
-function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-    sidebar.classList.toggle("active");
-    overlay.classList.toggle("active");
-}
+// Menú hamburguesa lo gestiona js/menu.js (común)
 
 // Obtener suscriptores
 async function obtenerSuscriptores() {

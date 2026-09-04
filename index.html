@@ -40,7 +40,8 @@
   <!-- Tu hoja de estilos (que incluye la parte del fade-in, menú, etc.) -->
   <link rel="stylesheet" href="/css/stile_home.css" />
 
-  <!-- Tu script con menú hamburguesa y fade-in -->
+  <!-- Menu común + script con fade-in -->
+  <script defer src="/js/menu.js"></script>
   <script defer src="/js/script.js"></script>
 </head>
 <body>
@@ -52,6 +53,9 @@
     <div class="bar"></div>
     <div class="bar"></div>
   </div>
+
+  <!-- Overlay para efecto borroso -->
+  <div class="overlay" id="overlay"></div>
 
   <!-- Contenedor principal (2 columnas) con clase fade-in -->
   <div class="container fade-in">

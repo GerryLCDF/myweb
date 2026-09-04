@@ -1,32 +1,6 @@
 /*********************************************
-   MENÚ HAMBURGUESA
+   MENÚ HAMBURGUESA: lo gestiona js/menu.js (común)
 *********************************************/
-function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    const mainContainer = document.querySelector(".g-container") 
-    || document.querySelector(".container");
-
-    sidebar.classList.toggle("active");
-    if (mainContainer) {
-        mainContainer.classList.toggle("blurred");
-    }
-}
-
-// Cerrar el menú si se hace clic fuera
-document.addEventListener("click", (e) => {
-    const sidebar = document.getElementById("sidebar");
-    const menuBar = document.querySelector(".menu-bar");
-    const mainContainer = document.querySelector(".g-container") || document.querySelector(".container");
-
-    if (sidebar.classList.contains("active")) {
-        if (!sidebar.contains(e.target) && !menuBar.contains(e.target)) {
-            sidebar.classList.remove("active");
-            if (mainContainer) {
-                mainContainer.classList.remove("blurred");
-            }
-        }
-    }
-});
 
 
 /*********************************************
